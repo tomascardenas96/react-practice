@@ -3,7 +3,6 @@ import Login from "./pages/login";
 import Home from "./pages/home";
 import Analytics from "./pages/analytics";
 import Dashboard from "./pages/dashboard";
-
 import Navbar from "./components/Navbar";
 import { UserProvider } from "./context/UserProvider";
 import ProtectedRoute from "./components/ProtectedRoute";
@@ -16,11 +15,18 @@ function App() {
           <Navbar />
           <Routes>
             <Route index element={<Login />} />
-            <Route element={<ProtectedRoute />}>
+            <Route element={<ProtectedRoute role="user" />}>
               <Route path="/home" element={<Home />} />
               <Route path="/analytics" element={<Analytics />} />
-              <Route path="/dashboard" element={<Dashboard />} />
             </Route>
+            <Route
+              path="/dashboard"
+              element={
+                <ProtectedRoute role="admin">
+                  <Dashboard />
+                </ProtectedRoute>
+              }
+            />
             <Route path="/*" element={<Login />} />
           </Routes>
         </BrowserRouter>
