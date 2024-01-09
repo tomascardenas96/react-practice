@@ -1,7 +1,13 @@
+import { useContext } from "react";
+import { UserContext } from "../context/UserProvider";
+import { Navigate } from "react-router-dom";
+
 function Login() {
-  return (
-    <div>login</div>
-  )
+  const { user } = useContext(UserContext);
+  if (user) {
+    return <Navigate to="/home" />;
+  }
+  return <div>login</div>;
 }
 
-export default Login
+export default Login;

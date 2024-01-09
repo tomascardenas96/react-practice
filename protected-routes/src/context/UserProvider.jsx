@@ -10,7 +10,7 @@ function UserProvider({ children }) {
       id: 1,
       name: "John",
       password: "pass1234",
-      permission: ['admin', 'user']
+      permission: ['user', 'admin']
     });
   };
 
