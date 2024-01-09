@@ -1,4 +1,4 @@
-import { Navigate } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 import { UserContext } from "../context/UserProvider";
 import { useContext } from "react";
 
@@ -8,7 +8,7 @@ function ProtectedRoute({ children }) {
   if (!user) {
     return <Navigate to="/" />;
   }
-  return <>{children}</>;
+  return children ? children : <Outlet />
 }
 
 export default ProtectedRoute;

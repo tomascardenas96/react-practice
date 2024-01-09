@@ -7,7 +7,7 @@ import Dashboard from "./pages/dashboard";
 import Navbar from "./components/Navbar";
 import { UserProvider } from "./context/UserProvider";
 import ProtectedRoute from "./components/ProtectedRoute";
-import SesionButton from "./components/SesionButton";
+
 function App() {
   return (
     <>
@@ -16,20 +16,14 @@ function App() {
           <Navbar />
           <Routes>
             <Route index element={<Login />} />
-            <Route
-              path="/home"
-              element={
-                <ProtectedRoute>
-                  <Home />
-                </ProtectedRoute>
-              }
-            />
-            <Route path="/analytics" element={<Analytics />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="*" element={<Login />} />
+            <Route element={<ProtectedRoute />}>
+              <Route path="/home" element={<Home />} />
+              <Route path="/analytics" element={<Analytics />} />
+              <Route path="/dashboard" element={<Dashboard />} />
+            </Route>
+            <Route path="/*" element={<Login />} />
           </Routes>
         </BrowserRouter>
-        <SesionButton/>
       </UserProvider>
     </>
   );

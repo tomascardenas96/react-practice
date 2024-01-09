@@ -1,4 +1,7 @@
 import { NavLink } from "react-router-dom";
+import SesionButton from "./SesionButton";
+import './styles/Navbar.css';
+
 const Navbar = () => {
   return (
     <>
@@ -17,6 +20,7 @@ const Navbar = () => {
             <NavLink to="/dashboard">Dashboard</NavLink>
           </li>
         </ul>
+        <SesionButton />
       </header>
     </>
   );
