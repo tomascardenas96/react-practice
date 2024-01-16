@@ -56,7 +56,9 @@ export class AuthService {
     return {
       token,
       email,
-      message: 'success'
-    }
+      username: user.username,
+      role: user.role,
+      message: 'success',
+    };
   }
 }
