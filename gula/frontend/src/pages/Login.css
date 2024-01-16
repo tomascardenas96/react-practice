@@ -4,7 +4,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background: radial-gradient(#ff0c34, #ad0320);
+    background: var(--login-page_bg);
 }
 
 .login-page {
@@ -117,8 +117,14 @@
 
 .login-page__form-button > p {
     font-size: .9rem;
-    align-self: center;
-    text-decoration: underline;
+
+
     cursor: pointer;
     color: white;
+}
+
+.login-page__form-button > a {
+    color: white;
+    text-decoration: underline;
+    align-self: center;
 }

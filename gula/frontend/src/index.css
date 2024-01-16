@@ -5,6 +5,7 @@
 
 :root {
     --font-color : #EDF2F4;
+    --login-page_bg: radial-gradient(#ff3939, #b3001e);
 }
 
 * {

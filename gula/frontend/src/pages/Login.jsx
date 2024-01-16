@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Navigate } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import "./Login.css";
 
 function Login() {
@@ -61,7 +61,7 @@ function Login() {
           <div className="login-page__side-slogan">
             <h1>Bienvenido/a! a la primera App de pedidos de Benito Juarez</h1>
             <h2>Tenes hambre? Tenes</h2>
-            <img src="../../assets/images/Logo Gula Rojo.png" alt="gula-logo" />
+            <img src="../../assets/images/Logo-Gula-blanco.png" alt="gula-logo" />
           </div>
           <div className="login-page__divider-line" />
           <div className="login-page__login-form">
@@ -81,7 +81,7 @@ function Login() {
               </label>
               <div className="login-page__form-button">
                 <input type="submit" value="Entrar" />
-                <p>¿Todavia no tenes cuenta? Registrate gratis</p>
+                <Link to="/register"><p>¿Todavia no tenes cuenta? Registrate gratis</p></Link>
               </div>
             </form>
           </div>

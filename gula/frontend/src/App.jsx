@@ -5,6 +5,7 @@ import Profile from "./pages/Profile";
 import Menu from "./components/Menu";
 import { UserProvider } from "./provider/UserProvider";
 import Protected from "./components/Protected";
+import Register from "./pages/Register";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <UserProvider>
           <Routes>
             <Route index element={<Login />} />
+            <Route exact path="/register" element={<Register />}/>
             <Route path="/" element={<Menu />}>
               <Route element={<Protected role="user" />}>
                 <Route exact path="/home" element={<Home />} />
