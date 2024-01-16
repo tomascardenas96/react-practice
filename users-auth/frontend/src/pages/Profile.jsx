@@ -1,8 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
-// import { userContext } from "../provider/UserProvider";
+import Spinner from "../components/Spinner";
+import "./Profile.css";
 
 function Profile() {
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   const username = localStorage.getItem("username");
 
@@ -15,12 +17,14 @@ function Profile() {
         headers: {
           authorization: `Bearer ${token}`,
         },
-      }).then((response) => {
-        if (!response.ok) {
-          throw new Error("Unauthorizated");
-        }
-        return response.json();
-      });
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Unauthorizated");
+          }
+          return response.json();
+        })
+        .then((data) => setLoading(false));
     } catch (error) {
       setError(true);
     }
@@ -30,9 +34,15 @@ function Profile() {
     return <h1>Error</h1>;
   }
 
+  if (loading) {
+    return <Spinner />;
+  }
+
   return (
     <>
-      <h1>{username}</h1>
+      <main className="profile__container">
+        <h1>{username}</h1>
+      </main>
     </>
   );
 }
