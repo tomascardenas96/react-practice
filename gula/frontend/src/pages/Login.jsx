@@ -57,17 +57,35 @@ function Login() {
   return (
     <>
       <main className="login__container">
-        <form onSubmit={handleSubmit}>
-          <label htmlFor="email">
-            Email
-            <input type="email" name="email" onChange={handleChange} />
-          </label>
-          <label htmlFor="password">
-            Password
-            <input type="password" name="password" onChange={handleChange} />
-          </label>
-          <input type="submit" value="Enter" />
-        </form>
+        <div className="login-page">
+          <div className="login-page__side-slogan">
+            <h1>Bienvenido/a! a la primera App de pedidos de Benito Juarez</h1>
+            <h2>Tenes hambre? Tenes</h2>
+            <img src="../../assets/images/Logo Gula Rojo.png" alt="gula-logo" />
+          </div>
+          <div className="login-page__divider-line" />
+          <div className="login-page__login-form">
+            <form onSubmit={handleSubmit}>
+              <h1>Ingresar</h1>
+              <label htmlFor="email">
+                Email
+                <input type="email" name="email" onChange={handleChange} />
+              </label>
+              <label htmlFor="password">
+                Password
+                <input
+                  type="password"
+                  name="password"
+                  onChange={handleChange}
+                />
+              </label>
+              <div className="login-page__form-button">
+                <input type="submit" value="Entrar" />
+                <p>¿Todavia no tenes cuenta? Registrate gratis</p>
+              </div>
+            </form>
+          </div>
+        </div>
       </main>
     </>
   );

@@ -1,8 +1,17 @@
+@font-face {
+    font-family: arial-rounded;
+    src: url('../assets/arial-rounded.ttf');
+}
+
+:root {
+    --font-color : #EDF2F4;
+}
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: sans-serif;
+    font-family: arial-rounded;
 }
 
 html, body {
