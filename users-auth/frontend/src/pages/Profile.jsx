@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Spinner from "../components/Spinner";
 import "./Profile.css";
 
