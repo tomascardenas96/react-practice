@@ -1,130 +1,127 @@
 .login__container {
-    width: 100%;
-    height: 100svh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: var(--login-page_bg);
+  width: 100%;
+  height: 100svh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--login-page_bg);
 }
 
 .login-page {
-    display: flex;
-    min-height: 75%;
-    width: 80%;
+  display: flex;
+  min-height: 75%;
+  width: 80%;
 }
 
 .login-page__side-slogan {
-    display: flex;
-    flex-direction: column;
-    flex-grow: 3;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 3;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
 }
 
 .login-page__side-slogan h1 {
-    font-size: 1.8rem;
-    border-bottom: 3px solid var(--font-color);
-    padding-bottom: 2rem;
+  font-size: 1.8rem;
+  border-bottom: 3px solid var(--font-color);
+  padding-bottom: 2rem;
 }
 
 .login-page__side-slogan h1,
 .login-page__side-slogan h2 {
-    max-width: 15ch;
-    text-align: center;
-    display:flex;
-    justify-content: center;
-    width: 100%;
-    color: var(--font-color);
-    filter: drop-shadow(1px 1px 1px black);
+  max-width: 15ch;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  color: var(--font-color);
+  filter: drop-shadow(1px 1px 1px black);
 }
 
 .login-page__side-slogan h2 {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 
-
 .login-page__side-slogan img {
-    width: 10rem;
-    color: var(--font-color);
-    margin-top: -.4rem;
-    filter: drop-shadow(1px 1px 1px black);
+  width: 10rem;
+  color: var(--font-color);
+  margin-top: -0.4rem;
+  filter: drop-shadow(1px 1px 1px black);
 }
 
 .login-page__divider-line {
-    display: flex;
-    border: 1.5px solid var(--font-color);
-    /* filter: drop-shadow(1px 1px 1px black); */
+  display: flex;
+  border: 1.5px solid var(--font-color);
+  /* filter: drop-shadow(1px 1px 1px black); */
 }
 
 .login-page__login-form {
-    display: flex;
-    flex-grow: 3;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  flex-grow: 3;
+  justify-content: center;
+  align-items: center;
 }
 
 .login-page__login-form form {
-    display: flex;
-    flex-direction: column;
-    padding: 3.6rem 0;
-    justify-content: space-between;
-    align-items: start;
-    min-height: 60%;   
-    width: 60%;
-    color: var(--font-color);
+  display: flex;
+  flex-direction: column;
+  padding: 3.6rem 0;
+  justify-content: space-between;
+  align-items: start;
+  min-height: 60%;
+  width: 60%;
+  color: var(--font-color);
 }
 
 .login-page__login-form form > h1 {
-    align-self: center;
-    color: var(--font-color);
-    filter: drop-shadow(1px 1px 1px black);
-    margin-bottom: -2rem;
+  align-self: center;
+  color: var(--font-color);
+  filter: drop-shadow(1px 1px 1px black);
+  margin-bottom: -2rem;
 }
 
 .login-page__login-form form input,
 .login-page__login-form form label {
-    width: 100%;
-    height: 2rem;
-    font-size: .8rem;
-    border: none;
+  width: 100%;
+  height: 2rem;
+  font-size: 0.8rem;
+  border: none;
 }
 
 .login-page__login-form form input {
-    padding-left: .5rem;
-    margin-top: .2rem;
+  padding-left: 0.5rem;
+  margin-top: 0.2rem;
 }
 
 .login-page__login-form form input:focus {
-    outline: 2px solid black;
+  outline: 2px solid black;
 }
 
 .login-page__login-form form input[type="submit"] {
-    border: none;
-    height: 2.2rem;
-    margin-top: .6rem;
-    font-size: 1.2rem;
-    letter-spacing: .1rem;
+  border: none;
+  height: 2.2rem;
+  margin-top: 0.6rem;
+  font-size: 1.2rem;
+  letter-spacing: 0.1rem;
 }
 
 .login-page__form-button {
-    width: 100%;
-    display:flex;
-    flex-direction: column;
-    gap: 1rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
 .login-page__form-button > p {
-    font-size: .9rem;
-
-
-    cursor: pointer;
-    color: white;
+  font-size: 0.9rem;
+  cursor: pointer;
+  color: white;
 }
 
 .login-page__form-button > a {
-    color: white;
-    text-decoration: underline;
-    align-self: center;
+  color: white;
+  text-decoration: underline;
+  align-self: center;
 }

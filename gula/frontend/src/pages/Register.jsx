@@ -1,12 +1,13 @@
 import React from "react";
 import { useState } from "react";
 import "./Register.css";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 
 function Register() {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
+  const token = localStorage.getItem('token');
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -27,11 +28,15 @@ function Register() {
     } catch (error) {}
   };
 
+  if(token) {
+    return <Navigate to="/"/>
+  }
+
   return (
     <>
       <main className="register-page_container">
         <form onSubmit={handleSubmit} className="register-page__form">
-          <h1>- Registro - </h1>
+          <h1>Unite a nuestra comunidad...</h1>
           <label htmlFor="username">
             Nombre de usuario
             <input
@@ -73,6 +78,9 @@ function Register() {
             </Link>
           </div>
         </form>
+        <div>
+          <img src="../../assets/images/Flyer-Moto.png" alt="flyer-moto-gula" />
+        </div>
       </main>
     </>
   );

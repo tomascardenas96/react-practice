@@ -14,13 +14,13 @@ function App() {
         <UserProvider>
           <Routes>
             <Route index element={<Login />} />
-            <Route exact path="/register" element={<Register />}/>
+            <Route exact path="/register" element={<Register />} />
             <Route path="/" element={<Menu />}>
               <Route element={<Protected role="user" />}>
                 <Route exact path="/home" element={<Home />} />
                 <Route exact path="/profile" element={<Profile />} />
               </Route>
-            <Route exact path="/*" element={<h1>Pagina no encontrada</h1>} />
+              <Route exact path="/*" element={<h1>Pagina no encontrada</h1>} />
             </Route>
           </Routes>
         </UserProvider>

@@ -5,11 +5,11 @@
 
 :root {
     --font-color : #EDF2F4;
-    --login-page_bg: radial-gradient(#ff3939, #b3001e);
+    --login-page_bg: radial-gradient(#fe4444, #b3001e);
 }
 
 * {
-    margin: 0;
+    margin: 0;  
     padding: 0;
     box-sizing: border-box;
     font-family: arial-rounded;
