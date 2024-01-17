@@ -20,6 +20,7 @@ function Home() {
       })
         .then((response) => {
           if (!response.ok) {
+            setError(true);
             throw new Error("Unauthorizated");
           }
           return response.json();
