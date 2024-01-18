@@ -1,12 +1,12 @@
 import React from "react";
 import { Navigate, Outlet } from "react-router-dom";
 
-function Protected({ children, role }) {
+function Protected({ children, permission }) {
   const user = localStorage.getItem("token");
-  const userRole = localStorage.getItem("role");
+  const userPermission = localStorage.getItem("permission");
 
   const isAuth = () => {
-    return userRole === role;
+    return userPermission === permission;
   };
 
   if (user !== null && user !== undefined && isAuth()) {
@@ -16,7 +16,7 @@ function Protected({ children, role }) {
   if(!isAuth()) {
     localStorage.removeItem('username');
     localStorage.removeItem('token');
-    localStorage.removeItem('role');
+    localStorage.removeItem('permission');
   }
 
     return <Navigate to="/" />;

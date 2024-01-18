@@ -1,12 +1,14 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Spinner from "../components/Spinner";
 import "./Home.css";
+import Header from "../components/Header";
+import HeaderFilter from "../components/HeaderFilter";
+import Categories from "../components/Categories";
 
 function Home() {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  const username = localStorage.getItem("username");
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -42,7 +44,9 @@ function Home() {
   return (
     <>
       <main className="home__container">
-        <h1>Home</h1>
+        <Header />
+        <HeaderFilter />
+        <Categories />
       </main>
     </>
   );

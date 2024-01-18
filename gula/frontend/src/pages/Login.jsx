@@ -35,7 +35,7 @@ function Login() {
           setLoading(false);
           localStorage.setItem("token", data.token);
           localStorage.setItem("username", data.username);
-          localStorage.setItem("role", data.role);
+          localStorage.setItem("permission", data.permission);
         });
     } catch (error) {
       throw new Error(error);
