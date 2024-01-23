@@ -10,6 +10,8 @@ import { AuthService } from './auth.service';
 import { LoginDto } from './dto/login.dto';
 import { RegisterDto } from './dto/register.dto';
 import { AuthGuard } from './guard/auth.guard';
+import { Permission } from './enum/permission.enum';
+import { PermissionGuard } from './guard/permission.guard';
 
 @Controller('auth')
 export class AuthController {
@@ -26,13 +28,15 @@ export class AuthController {
   }
 
   @Get('/profile')
-  @UseGuards(AuthGuard)
+  @Permission('user')
+  @UseGuards(AuthGuard, PermissionGuard)
   profile(@Request() request: any) {
     return request.user;
   }
 
   @Get('/home')
-  @UseGuards(AuthGuard)
+  @Permission('user')
+  @UseGuards(AuthGuard, PermissionGuard)
   home(@Request() request: any) {
     return request.user;
   }

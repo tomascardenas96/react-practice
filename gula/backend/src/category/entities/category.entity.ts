@@ -9,6 +9,9 @@ export class Category {
   @Column({ nullable: false })
   description: string;
 
+  @Column({nullable: false})
+  icon: string;
+
   @OneToMany(()=> Food, (food)=> food.category, { onDelete: 'CASCADE' })
   food: Food[];
 }

@@ -43,7 +43,7 @@ export class AuthService {
       throw new UnauthorizedException('Incorrect password');
     }
 
-    const payload = { email: user.email };
+    const payload = { email: user.email, permission: user.permission };
     const secretKey = process.env.JWT_SECRET;
     if (!secretKey) {
       throw new UnauthorizedException();
@@ -56,8 +56,6 @@ export class AuthService {
     return {
       token,
       email,
-      username: user.username,
-      role: user.role,
       message: 'success',
     };
   }
