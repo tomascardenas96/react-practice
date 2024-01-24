@@ -30,15 +30,13 @@ export class AuthController {
   }
 
   @Get('/profile')
-  @Permission(UserPermission.USER)
-  @UseGuards(AuthGuard, PermissionGuard)
+  @UseGuards(AuthGuard)
   profile(@Req() req: Request & {user: { email: string, permission: string }}) {
     return req.user;
   }
 
   @Get('/home')
-  @Permission(UserPermission.USER)
-  @UseGuards(AuthGuard, PermissionGuard)
+  @UseGuards(AuthGuard)
   home(@Req() req: Request & {user: { email: string, permission: string }}) {
     return req.user;
   }

@@ -34,7 +34,7 @@ export class AuthService {
   }
 
   async login({ email, password }: LoginDto) {
-    const user = await this.userService.findByEmailWithPassword(email);
+    const user = await this.userService.findByEmail(email);
     if (!user) {
       throw new UnauthorizedException('E-mail wrong or inexistent ');
     }
@@ -43,7 +43,7 @@ export class AuthService {
       throw new UnauthorizedException('Incorrect password');
     }
 
-    const payload = { email: user.email, permission: user.permission };
+    const payload = { email: user.email };
     const secretKey = process.env.JWT_SECRET;
     if (!secretKey) {
       throw new UnauthorizedException();
@@ -55,7 +55,9 @@ export class AuthService {
 
     return {
       token,
+      username: user.username,
       email,
+      permission: user.permission,
       message: 'success',
     };
   }

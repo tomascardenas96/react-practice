@@ -7,7 +7,7 @@
 .footer__container .footer {
   width: 100%;
   background-color: #fe4444fb;
-  margin: .5rem;
+  margin: 0 .5rem;
   border-radius: 0.3rem;
   display: flex;
   justify-content: space-between;

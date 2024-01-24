@@ -24,13 +24,6 @@ export class UserService {
     return this.userRepository.findOneBy({ email });
   }
 
-  findByEmailWithPassword(email: string) {
-    return this.userRepository.findOne({
-      where: { email },
-      select: ['userId', 'email', 'username', 'password', 'role', 'permission']
-    });
-  }
-
   findByUserName(username: string) {
     return this.userRepository.findOneBy({ username });
   }
