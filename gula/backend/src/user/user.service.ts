@@ -11,6 +11,10 @@ export class UserService {
     private readonly userRepository: Repository<User>,
   ) {}
 
+  findAll() {
+    return this.userRepository.find();
+  }
+
   create(user: CreateUserDto) {
     const newUser = this.userRepository.create(user);
     return this.userRepository.save(newUser);
@@ -18,6 +22,13 @@ export class UserService {
 
   findByEmail(email: string) {
     return this.userRepository.findOneBy({ email });
+  }
+
+  findByEmailWithPassword(email: string) {
+    return this.userRepository.findOne({
+      where: { email },
+      select: ['userId', 'email', 'username', 'password', 'role', 'permission']
+    });
   }
 
   findByUserName(username: string) {

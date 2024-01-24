@@ -1,0 +1,17 @@
+.food-trade-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.food-trade-card > img {
+    width: 16rem;
+    height: 11rem;
+    border: 2px solid black;
+    padding: .2rem;
+    border-radius: 8px;
+}
+
+.food-trade-card > p {
+    font-size: 1.3rem;
+}

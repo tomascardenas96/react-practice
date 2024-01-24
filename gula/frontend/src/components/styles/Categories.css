@@ -17,13 +17,15 @@
 .categories-food__container section h1 {
     font-size: 2rem;
     letter-spacing: .1rem;
+    color: rgba(0, 0, 0, 0.71)
 }
 
 .categories-food__container > section > div {
   display: flex;
   flex-wrap: nowrap;
   width: 100%;
-  gap: 2rem;
+  gap: 2.4rem;
+  overflow-x: auto;
 }
 
 .categories-food__container > section > div > * {

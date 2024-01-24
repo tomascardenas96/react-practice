@@ -3,15 +3,17 @@ import {
   Post,
   Body,
   Get,
-  Request,
+  Req,
   UseGuards,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { LoginDto } from './dto/login.dto';
 import { RegisterDto } from './dto/register.dto';
 import { AuthGuard } from './guard/auth.guard';
-import { Permission } from './enum/permission.enum';
+import { Permission } from './decorators/permission.decorator';
 import { PermissionGuard } from './guard/permission.guard';
+import Request from 'express';
+import { UserPermission } from 'src/user/entities/permission.enum';
 
 @Controller('auth')
 export class AuthController {
@@ -28,16 +30,16 @@ export class AuthController {
   }
 
   @Get('/profile')
-  @Permission('user')
+  @Permission(UserPermission.USER)
   @UseGuards(AuthGuard, PermissionGuard)
-  profile(@Request() request: any) {
-    return request.user;
+  profile(@Req() req: Request & {user: { email: string, permission: string }}) {
+    return req.user;
   }
 
   @Get('/home')
-  @Permission('user')
+  @Permission(UserPermission.USER)
   @UseGuards(AuthGuard, PermissionGuard)
-  home(@Request() request: any) {
-    return request.user;
+  home(@Req() req: Request & {user: { email: string, permission: string }}) {
+    return req.user;
   }
 }

@@ -16,7 +16,6 @@
 }
 
 .header-filter > div {
-    /* width: 40rem; */
     height: 80%;
     display: flex;
     flex-direction: column;

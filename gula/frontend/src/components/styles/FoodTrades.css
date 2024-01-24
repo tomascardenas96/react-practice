@@ -1,0 +1,33 @@
+.food-trades__container {
+    /* background-color: lightblue; */
+    margin: 1rem;
+    display: flex;
+    min-height: 20rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.food-trades {
+    display: flex;
+    flex-direction: column;
+    min-height: 20rem;
+    width: 95rem;
+    justify-content: start;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 1rem;
+}
+
+.food-trades > h1 {
+    font-size: 2rem;
+    letter-spacing: .1rem;
+    color: rgba(0, 0, 0, 0.71)
+}
+
+.food-trades > div  {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 1rem;
+}

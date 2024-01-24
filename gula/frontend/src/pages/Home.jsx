@@ -4,6 +4,8 @@ import "./Home.css";
 import Header from "../components/Header";
 import HeaderFilter from "../components/HeaderFilter";
 import Categories from "../components/Categories";
+import FoodTrades from "../components/FoodTrades";
+import Footer from "../components/Footer";
 
 function Home() {
   const [error, setError] = useState(null);
@@ -22,13 +24,15 @@ function Home() {
       })
         .then((response) => {
           if (!response.ok) {
+            console.log(2)
             setError(true);
-            throw new Error("Unauthorizated");
+            throw new Error("Unauthorizated"); 
           }
           return response.json();
         })
         .then((data) => setLoading(false));
     } catch (error) {
+      console.log(1)
       setError(true);
     }
   }, []);
@@ -47,6 +51,8 @@ function Home() {
         <Header />
         <HeaderFilter />
         <Categories />
+        <FoodTrades />
+        <Footer />
       </main>
     </>
   );
