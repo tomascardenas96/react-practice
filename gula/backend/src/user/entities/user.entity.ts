@@ -1,7 +1,7 @@
-import { UserPermission } from './permission.enum';
+import { UserPermission } from '../../common/permission.enum';
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
-import { UserRole } from './role.enum';
-import { Post } from 'src/post/entities/post.entity';
+import { UserRole } from '../../common/role.enum';
+import { Post } from '../../post/entities/post.entity';
 
 @Entity()
 export class User {

@@ -3,24 +3,25 @@ import { Navigate, Outlet } from "react-router-dom";
 
 function Protected({ children, permission }) {
   const user = localStorage.getItem("token");
-  const userPermission = localStorage.getItem("permission");
 
-  const isAuth = () => {
+  const isAuth = async () => {
+    const userPermission = await new Promise((resolve) => {
+      resolve(localStorage.getItem("permission"));
+    });
+    
     return userPermission === permission;
   };
 
-  if (user !== null && user !== undefined && isAuth()) {
-    return children ? children : <Outlet />;
+  if (!isAuth()) {
+    localStorage.removeItem("username");
+    localStorage.removeItem("token");
+    localStorage.removeItem("permission");
   }
-
-  if(!isAuth()) {
-    localStorage.removeItem('username');
-    localStorage.removeItem('token');
-    localStorage.removeItem('permission');
-  }
-
+  if (user === null || user === undefined) {
     return <Navigate to="/" />;
+  }
 
+  return children ? children : <Outlet />;
 }
 
 export default Protected;

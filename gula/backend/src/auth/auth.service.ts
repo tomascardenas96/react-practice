@@ -27,10 +27,16 @@ export class AuthService {
     const roundSalt = 10;
     const salt = await bcryptjs.genSalt(roundSalt);
 
-    return await this.userService.create({
+    await this.userService.create({
       ...user,
       password: await bcryptjs.hash(user.password, salt),
     });
+
+    return {
+      email: user.email,
+      username: user.username,
+      message: 'Register succesfull'
+    }
   }
 
   async login({ email, password }: LoginDto) {
@@ -43,7 +49,7 @@ export class AuthService {
       throw new UnauthorizedException('Incorrect password');
     }
 
-    const payload = { email: user.email, permission: user.permission };
+    const payload = { username: user.username ,email: user.email, permission: user.permission };
     const secretKey = process.env.JWT_SECRET;
     if (!secretKey) {
       throw new UnauthorizedException();

@@ -29,13 +29,12 @@ function Login() {
           return response.json();
         })
         .then((data) => {
-          if (data.message !== "success") {
+          if (data.token === undefined) {
             setError(true);
+            throw new Error();
           }
           setLoading(false);
           localStorage.setItem("token", data.token);
-          localStorage.setItem("username", data.username);
-          localStorage.setItem("permission", data.permission);
         });
     } catch (error) {
       throw new Error(error);

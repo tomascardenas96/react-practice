@@ -13,7 +13,7 @@ import { AuthGuard } from './guard/auth.guard';
 import { Permission } from './decorators/permission.decorator';
 import { PermissionGuard } from './guard/permission.guard';
 import Request from 'express';
-import { UserPermission } from 'src/user/entities/permission.enum';
+import { UserPermission } from 'src/common/permission.enum';
 
 @Controller('auth')
 export class AuthController {
@@ -32,14 +32,14 @@ export class AuthController {
   @Get('/profile')
   @Permission(UserPermission.USER)
   @UseGuards(AuthGuard, PermissionGuard)
-  profile(@Req() req: Request & {user: { email: string, permission: string }}) {
+  profile(@Req() req: Request & {user: { username: string, email: string, permission: string }}) {
     return req.user;
   }
 
   @Get('/home')
   @Permission(UserPermission.USER)
   @UseGuards(AuthGuard, PermissionGuard)
-  home(@Req() req: Request & {user: { email: string, permission: string }}) {
+  home(@Req() req: Request & {user: { username: string, email: string, permission: string }}) {
     return req.user;
   }
 }

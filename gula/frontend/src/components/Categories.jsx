@@ -31,6 +31,10 @@ function Categories() {
     return <Spinner />;
   }
 
+  const categoryIcons = [
+
+  ]
+
   return (
     <main className="categories-food__container">
       <section>

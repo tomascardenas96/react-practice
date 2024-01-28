@@ -11,7 +11,6 @@ function Home() {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
 
-
   useEffect(() => {
     const token = localStorage.getItem("token");
 
@@ -24,15 +23,17 @@ function Home() {
       })
         .then((response) => {
           if (!response.ok) {
-            console.log(2)
             setError(true);
-            throw new Error("Unauthorizated"); 
+            throw new Error("Unauthorizated");
           }
           return response.json();
         })
-        .then((data) => setLoading(false));
+        .then((data) => {
+          setLoading(false);
+          localStorage.setItem('username', data.username);
+          localStorage.setItem('permission', data.permission);
+        });
     } catch (error) {
-      console.log(1)
       setError(true);
     }
   }, []);
