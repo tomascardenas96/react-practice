@@ -9,11 +9,10 @@ import {
 import { AuthService } from './auth.service';
 import { LoginDto } from './dto/login.dto';
 import { RegisterDto } from './dto/register.dto';
-import { AuthGuard } from './guard/auth.guard';
-import { Permission } from './decorators/permission.decorator';
-import { PermissionGuard } from './guard/permission.guard';
-import Request from 'express';
-import { UserPermission } from 'src/common/permission.enum';
+import { UserPermission } from 'src/common/enum/permission.enum';
+import { Auth } from 'src/common/decorators/auth.decorator';
+import { ActiveUser } from 'src/common/decorators/active-user.decorator';
+import { ActiveUserInterface } from 'src/common/interfaces/active-user.interface';
 
 @Controller('auth')
 export class AuthController {
@@ -30,16 +29,14 @@ export class AuthController {
   }
 
   @Get('/profile')
-  @Permission(UserPermission.USER)
-  @UseGuards(AuthGuard, PermissionGuard)
-  profile(@Req() req: Request & {user: { username: string, email: string, permission: string }}) {
-    return req.user;
+  @Auth(UserPermission.USER)
+  profile(@ActiveUser() user: ActiveUserInterface) {
+    return user;
   }
 
   @Get('/home')
-  @Permission(UserPermission.USER)
-  @UseGuards(AuthGuard, PermissionGuard)
-  home(@Req() req: Request & {user: { username: string, email: string, permission: string }}) {
-    return req.user;
+  @Auth(UserPermission.USER)
+  home(@ActiveUser() user: ActiveUserInterface) {
+    return user;
   }
 }

@@ -49,7 +49,7 @@ export class AuthService {
       throw new UnauthorizedException('Incorrect password');
     }
 
-    const payload = { username: user.username ,email: user.email, permission: user.permission };
+    const payload = { userId: user.userId, username: user.username, permission: user.permission };
     const secretKey = process.env.JWT_SECRET;
     if (!secretKey) {
       throw new UnauthorizedException();
