@@ -1,6 +1,7 @@
 import "./styles/DropdownMenu.css";
 
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 function DropdownMenu() {
   const [reload, setReload] = useState(0);
@@ -14,9 +15,11 @@ function DropdownMenu() {
   return (
     <nav className="dropdown-menu__container">
       <ul>
-        <li>Configuracion</li>
+        <Link to="/profile">
+          <li>Perfil</li>
+        </Link>
         <li>Cuenta</li>
-        <li>Contactanos</li>
+        <li>Configuracion</li>
         <li onClick={handleLogOut}>Cerrar sesion</li>
       </ul>
     </nav>

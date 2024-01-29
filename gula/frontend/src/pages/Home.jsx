@@ -30,8 +30,8 @@ function Home() {
         })
         .then((data) => {
           setLoading(false);
-          localStorage.setItem('username', data.username);
-          localStorage.setItem('permission', data.permission);
+            localStorage.setItem("username", data.username);
+            localStorage.setItem("permission", data.permission);
         });
     } catch (error) {
       setError(true);
