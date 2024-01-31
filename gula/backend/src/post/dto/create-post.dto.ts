@@ -5,7 +5,4 @@ export class CreatePostDto {
     @IsNotEmpty()
     @MaxLength(255)
     description: string;
-
-    @IsNumber()   
-    userId: number;
 }

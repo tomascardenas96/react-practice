@@ -49,7 +49,9 @@ export class AuthService {
       throw new UnauthorizedException('Incorrect password');
     }
 
-    const payload = { userId: user.userId, username: user.username, permission: user.permission };
+    console.log(user);
+
+    const payload = { profilename: user.profilename, username: user.username, permission: user.permission };
     const secretKey = process.env.JWT_SECRET;
     if (!secretKey) {
       throw new UnauthorizedException();

@@ -15,12 +15,12 @@ import { Auth } from 'src/common/decorators/auth.decorator';
 import { ActiveUser } from 'src/common/decorators/active-user.decorator';
 import { ActiveUserInterface } from 'src/common/interfaces/active-user.interface';
 
+@Auth(UserPermission.USER)
 @Controller('post')
 export class PostController {
   constructor(private readonly postService: PostService) {}
 
   @Post()
-  @Auth(UserPermission.USER)
   create(
     @Body() createPostDto: CreatePostDto,
     @ActiveUser() user: ActiveUserInterface,
@@ -29,14 +29,13 @@ export class PostController {
   }
 
   @Get()
-  @Auth(UserPermission.USER)
   findAll(@ActiveUser() user: ActiveUserInterface) {
     return this.postService.findAll(user);
   }
 
-  @Get('user/:id')
-  findOne(@Param('id') id: string) {
-    return this.postService.findOne(+id);
+  @Get('/:profilename')
+  findPostsByProfileName(@Param('profilename') profilename: string) {
+    return this.postService.findPostsByProfileName(profilename);
   }
 
   @Patch(':id')

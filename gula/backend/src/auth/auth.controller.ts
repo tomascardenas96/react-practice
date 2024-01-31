@@ -3,8 +3,7 @@ import {
   Post,
   Body,
   Get,
-  Req,
-  UseGuards,
+  Param
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { LoginDto } from './dto/login.dto';
@@ -13,10 +12,14 @@ import { UserPermission } from 'src/common/enum/permission.enum';
 import { Auth } from 'src/common/decorators/auth.decorator';
 import { ActiveUser } from 'src/common/decorators/active-user.decorator';
 import { ActiveUserInterface } from 'src/common/interfaces/active-user.interface';
+import { UserService } from 'src/user/user.service';
 
 @Controller('auth')
 export class AuthController {
-  constructor(private readonly authService: AuthService) {}
+  constructor(
+    private readonly authService: AuthService,
+    private readonly userService: UserService
+    ) {}
 
   @Post('/register')
   register(@Body() user: RegisterDto) {
@@ -28,10 +31,10 @@ export class AuthController {
     return this.authService.login(user);
   }
 
-  @Get('/profile')
+  @Get('/profile/:profilename')
   @Auth(UserPermission.USER)
-  profile(@ActiveUser() user: ActiveUserInterface) {
-    return user;
+  profile(@Param('profilename') profilename: string ) {
+    return this.userService.findByProfileName(profilename);
   }
 
   @Get('/home')

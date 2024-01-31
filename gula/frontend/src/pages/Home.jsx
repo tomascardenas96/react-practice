@@ -30,7 +30,9 @@ function Home() {
         })
         .then((data) => {
           setLoading(false);
+          console.log(data);
             localStorage.setItem("username", data.username);
+            localStorage.setItem("profilename", data.profilename);
             localStorage.setItem("permission", data.permission);
         });
     } catch (error) {

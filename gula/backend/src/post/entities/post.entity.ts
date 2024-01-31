@@ -18,9 +18,9 @@ export class Post {
   @Column({ nullable: false })
   description: string;
   //   date: Date;
-  @ManyToOne(() => User, (user) => user.post, { onDelete: 'CASCADE' })
+  @ManyToOne(() => User, (user) => user.userId, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'userId' })
-  user: User;
+  userId: number;
 
   @ManyToMany(() => Food, (food) => food.post, { onDelete: 'CASCADE' })
   @JoinTable({

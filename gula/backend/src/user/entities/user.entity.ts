@@ -17,6 +17,9 @@ export class User {
   @Column({ nullable: false, select: false })
   password: string;
 
+  @Column({ nullable: false })
+  profilename: string;
+
   @Column({
     type: 'enum',
     default: UserRole.CUSTOMER,
@@ -33,6 +36,6 @@ export class User {
   })
   permission: UserPermission;
 
-  @OneToMany(()=> Post, (post) => post.user, {onDelete: 'CASCADE'})
+  @OneToMany(()=> Post, (post) => post.userId, {onDelete: 'CASCADE'})
   post: Post[];
 }

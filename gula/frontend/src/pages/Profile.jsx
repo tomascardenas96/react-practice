@@ -1,22 +1,24 @@
 import React, { useEffect, useState } from "react";
 import Spinner from "../components/Spinner";
 import "./Profile.css";
+import Publications from "../components/Publications";
+import { useParams } from "react-router-dom";
 
 function Profile() {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
-
-  const username = localStorage.getItem("username");
+  const [user, setUser] = useState([]);
+  const { profilename } = useParams()
 
   useEffect(() => {
     const token = localStorage.getItem("token");
 
     try {
-      fetch("http://localhost:3070/api/v1/auth/profile", {
-        method: "GET",
+      fetch(`http://localhost:3070/api/v1/auth/profile/${profilename}`, {
+        method: 'GET',
         headers: {
-          authorization: `Bearer ${token}`,
-        },
+          authorization: `Bearer ${token}`
+        }
       })
         .then((response) => {
           if (!response.ok) {
@@ -24,7 +26,11 @@ function Profile() {
           }
           return response.json();
         })
-        .then((data) => setLoading(false));
+        .then((data) => {
+          console.log(data);
+          setUser(data);
+          setLoading(false)
+        });
     } catch (error) {
       setError(true);
     }
@@ -41,8 +47,9 @@ function Profile() {
   return (
     <>
       <main className="profile__container">
-        <h1>{username}</h1>
+        <h1>{user.username}</h1>
       </main>
+      <Publications />
     </>
   );
 }

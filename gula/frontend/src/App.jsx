@@ -14,7 +14,7 @@ function App() {
             <Route exact path="/register" element={<Register />} />
             <Route element={<Protected permission="user" />}>
               <Route exact path="/home" element={<Home />} />
-              <Route exact path="/profile" element={<Profile />} />
+              <Route exact path='/profile/:profilename' element={<Profile />} />
               <Route exact path="/*" element={<h1>Pagina no encontrada</h1>} />
             </Route>
           </Routes>
