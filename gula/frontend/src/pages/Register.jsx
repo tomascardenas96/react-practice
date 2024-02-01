@@ -24,7 +24,10 @@ function Register() {
       }).then((response) => {
         setLoading(true);
         return response.json;
-      });
+      })
+      .then((data) => {
+        console.log(data);
+      })
     } catch (error) {}
   };
 

@@ -8,11 +8,11 @@
 
 .categories-food__container section {
   margin: 0.5rem;
-  max-width: 95rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2rem;
+  /* gap: 1rem; */
+  width: 100%;
 }
 
 .categories-food__container section h1 {
@@ -27,6 +27,8 @@
   width: 100%;
   gap: 2rem;
   overflow-x: auto;
+  justify-content: center;
+  padding: 2rem;
 }
 
 .categories-food__container > section > div > * {

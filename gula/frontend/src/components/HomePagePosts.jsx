@@ -15,12 +15,12 @@ function HomePagePosts() {
         "Content-Type": "application/json",
       },
     })
-    .then((response) => {
-      return response.json();
-    })
-    .then((data) => {
-      setPublications(data);
-    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        setPublications(data);
+      });
   }, []);
 
   return (
@@ -30,11 +30,18 @@ function HomePagePosts() {
           <h1>Publicaciones</h1>
         </div>
         <NewPost />
-        <div>
-        {publications.map((publication, idx) => (
-            <PublicationCard key={idx} username={publication.name} publication={publication.description}/>
-        ))}
-    </div>
+        <div className="home-page-posts__publications-container">
+          {publications
+            .slice()
+            .reverse()
+            .map((publication, idx) => (
+              <PublicationCard
+                key={idx}
+                username={publication.name}
+                publication={publication.description}
+              />
+            ))}
+        </div>
       </section>
     </>
   );

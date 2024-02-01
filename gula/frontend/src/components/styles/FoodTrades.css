@@ -1,6 +1,4 @@
 .food-trades__container {
-    /* background-color: lightblue; */
-    margin: 2rem;
     display: flex;
     min-height: 20rem;
     justify-content: center;
@@ -26,8 +24,10 @@
 
 .food-trades > div  {
     width: 100%;
-    display: flex;
+    display: grid;
     align-items: center;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    /* grid-template-rows: 1fr; */
     justify-content: space-between;
     padding: 0 1rem;
 }

@@ -13,13 +13,18 @@
     align-items: center;
     justify-content: center;
     border-radius: 50%;
-    border: 4px solid black;
+    border: 3.5px solid rgba(0, 0, 0, 0.841);
+    transition: transform 0.3s ease; 
+}
+
+.category-card__container > div:hover {
+    transform: scale(1.2)
+    /* background: linear-gradient(0deg, rgba(196, 196, 45, 0.801) 0%,rgba(255, 255, 153, 1) 100%) 50% 50%; */
 }
 
 .category-card__container > div > p {
-    font-size: 4rem;
+    font-size: 3.4rem;
     border-radius: 50%;
-    margin-top: -.6rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -30,3 +35,13 @@
     font-weight: 900;
     color: rgba(0, 0, 0, 0.71);
 }
+
+.hover-background {
+    width: 200px;
+    height: 200px;
+    transition: background-color 0.3s ease; /* Transición suave durante 0.3 segundos */
+  }
+  
+  .hover-background:hover {
+    background-color: red; /* Color de fondo al pasar el mouse sobre el elemento */
+  }

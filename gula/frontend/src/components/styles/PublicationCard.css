@@ -1,0 +1,5 @@
+.publication-card {
+    /* width: 100%; */
+    border: 1px solid rgba(0, 0, 0, 0.447);
+    padding: 2rem;
+}   
