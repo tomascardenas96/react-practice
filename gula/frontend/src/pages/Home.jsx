@@ -6,6 +6,8 @@ import HeaderFilter from "../components/HeaderFilter";
 import Categories from "../components/Categories";
 import FoodTrades from "../components/FoodTrades";
 import Footer from "../components/Footer";
+import NewPost from "../components/NewPost";
+import HomePagePosts from "../components/HomePagePosts";
 
 function Home() {
   const [error, setError] = useState(null);
@@ -30,10 +32,9 @@ function Home() {
         })
         .then((data) => {
           setLoading(false);
-          console.log(data);
-            localStorage.setItem("username", data.username);
-            localStorage.setItem("profilename", data.profilename);
-            localStorage.setItem("permission", data.permission);
+          localStorage.setItem("username", data.username);
+          localStorage.setItem("profilename", data.profilename);
+          localStorage.setItem("permission", data.permission);
         });
     } catch (error) {
       setError(true);
@@ -45,7 +46,11 @@ function Home() {
   }
 
   if (loading) {
-    return <Spinner />;
+    return (
+      <div className="home__loading">
+        <Spinner />;
+      </div>
+    );
   }
 
   return (
@@ -55,6 +60,7 @@ function Home() {
         <HeaderFilter />
         <Categories />
         <FoodTrades />
+        <HomePagePosts />
         <Footer />
       </main>
     </>

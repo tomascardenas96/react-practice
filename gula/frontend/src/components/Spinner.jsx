@@ -3,9 +3,12 @@ import "./styles/Spinner.css"; // Asegúrate de tener un archivo CSS para estilo
 
 const Spinner = () => {
   return (
-    <div className="spinner-container">
-      <div className="spinner"></div>
-    </div>
+    <div className="loadership_NPFGM">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
   );
 };
 

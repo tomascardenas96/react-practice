@@ -6,7 +6,6 @@ function Publications() {
   const [publications, setPublications] = useState([]);
   const { profilename } = useParams();
   const token = localStorage.getItem("token");
-  const username = localStorage.getItem("username");
 
   useEffect(() => {
     fetch(`http://localhost:3070/api/v1/post/${profilename}`, {
@@ -18,6 +17,7 @@ function Publications() {
     )
       .then((response) => response.json())
       .then((data) => {
+        console.log(data);
         setPublications(data);
       });
   }, []);
@@ -26,7 +26,7 @@ function Publications() {
   return <>
     <div>
         {publications.map((publication, idx) => (
-            <PublicationCard key={idx} username={username} publication={publication.description}/>
+            <PublicationCard key={idx} username={publication.name} publication={publication.description}/>
         ))}
     </div>
   </>;
