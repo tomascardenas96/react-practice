@@ -5,9 +5,13 @@ import { AuthModule } from './auth/auth.module';
 import { PostModule } from './post/post.module';
 import { CategoryModule } from './category/category.module';
 import { FoodModule } from './food/food.module';
+import { MulterModule } from '@nestjs/platform-express';
 
 @Module({
   imports: [
+    MulterModule.register({
+      dest: './uploads', 
+    }),
     UserModule,
     TypeOrmModule.forRoot({
       type: 'mysql',

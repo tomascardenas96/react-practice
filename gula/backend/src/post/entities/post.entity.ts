@@ -16,6 +16,9 @@ export class Post {
   postId: number;
 
   @Column({ nullable: false })
+  name: string;
+
+  @Column({ nullable: false })
   description: string;
   //   date: Date;
   @ManyToOne(() => User, (user) => user.userId, { onDelete: 'CASCADE' })

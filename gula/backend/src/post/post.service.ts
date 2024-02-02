@@ -22,13 +22,17 @@ export class PostService {
   ): Promise<Post> {
     const newPost = {
       ...createPostDto,
+      name: user.username,
       userId: user.userId,
     };
-
     return this.postRepository.save(newPost);
   }
 
-  findAll(user: ActiveUserInterface) {
+  findAll() {
+    return this.postRepository.find();
+  }
+
+  findAllOfUser(user: ActiveUserInterface) {
     if (user.permission === UserPermission.ADMIN) {
       return this.postRepository.find();
     }
@@ -37,6 +41,7 @@ export class PostService {
       where: { userId: user.userId },
     });
   }
+
 
   async findPostsByProfileName(profilename: string) {
     const user = await this.userService.findByProfileName(profilename);
