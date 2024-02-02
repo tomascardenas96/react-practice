@@ -1,7 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400..700;1,400..700&display=swap');
+
 .profile__container {
   min-height: 100svh;
   display: grid;
-  grid-template-rows: 4rem 18rem 11rem 1fr;
+  grid-template-rows: 4rem 17rem 11rem 1fr;
   grid-template-areas:
     "header header header"
     "hero hero hero"
@@ -120,7 +122,7 @@
   top: 11rem;
   left: 10rem;
   box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.348);
-  padding: 0.2rem;
+  padding: 0.3rem;
   z-index: 1100;
 }
 
@@ -133,9 +135,45 @@
   grid-area: presentation;
   box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.348);
   z-index: 1000;
+  display: grid;
+  grid-template-columns: 27.5rem minmax(max-content, 2fr) 1fr;
+
+}
+
+.profile__presentation > .profile__presentation-user-info {
+    margin-top: 1rem;;
+    width: 100%;
+    height: 60%;
+    grid-column-start: 2;
+    grid-column-end: 3;
+    display: grid;
+    gap: .2rem;
+}
+.profile__presentation-user-info > div {
+    margin-top: .8rem;
+    display: grid; 
+    grid-template-columns: repeat(4, max-content);
+    gap: 1rem;
+    font-size: .9rem;
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.profile__presentation-user-info > h1 {
+    font-size: 2.2rem;
+}
+
+.profile__presentation-user-info > h1,
+.profile__presentation-user-info > p {
+    margin-left: .3rem;
+}
+
+.profile__presentation-user-info > div > p {
+    display: flex;
+    align-items: center;
+    gap: .2rem;
 }
 
 .profile__main-content {
-  background-color: lightgoldenrodyellow;
+  background-color: rgba(0, 0, 0, 0.094);
   grid-area: main;
 }

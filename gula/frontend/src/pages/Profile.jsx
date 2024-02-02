@@ -4,6 +4,10 @@ import "./Profile.css";
 import Publications from "../components/Publications";
 import { useParams } from "react-router-dom";
 import { CiSearch } from "react-icons/ci";
+import { CiLocationOn } from "react-icons/ci";
+import { FaFacebookF } from "react-icons/fa";
+import { FaInstagram } from "react-icons/fa";
+import { FaTwitter } from "react-icons/fa";
 
 function Profile() {
   const [error, setError] = useState(null);
@@ -76,7 +80,26 @@ function Profile() {
             />
           </div>
         </section>
-        <section className="profile__presentation"></section>
+        <section className="profile__presentation">
+          <div className="profile__presentation-user-info">
+            <h1>Tomas Cardenas</h1>
+            <p>Rotiseria "Tirale los bigotes a Juan"</p>
+            <div>
+              <p>
+                <CiLocationOn /> Benito Juarez, Buenos Aires
+              </p>
+              <p>
+                <FaFacebookF /> tomas_cardenas
+              </p>
+              <p>
+                <FaInstagram /> tomicardenas96
+              </p>
+              <p>
+                <FaTwitter /> tomi_cardenas
+              </p>
+            </div>
+          </div>
+        </section>
         <section className="profile__main-content"></section>
       </main>
     </>
