@@ -1,3 +1,141 @@
 .profile__container {
-    /* height: 100svh; */
+  min-height: 100svh;
+  display: grid;
+  grid-template-rows: 4rem 18rem 11rem 1fr;
+  grid-template-areas:
+    "header header header"
+    "hero hero hero"
+    "presentation presentation presentation"
+    "main main main";
+}
+
+.profile__header {
+  grid-area: header;
+  display: grid;
+  grid-template-columns: 3fr 9fr 4fr;
+  box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.348);
+  z-index: 1000;
+}
+
+.header-logo {
+  display: grid;
+  justify-content: end;
+  align-content: center;
+}
+
+.header-logo > div {
+  padding-right: 2.4rem;
+  height: 90%;
+  border-right: 2px solid rgba(0, 0, 0, 0.097);
+}
+
+.header-logo img {
+  width: 5rem;
+}
+
+.header-search {
+  /* background-color: lightyellow; */
+  display: grid;
+  align-items: center;
+  padding-left: 3rem;
+}
+
+.header-search > div {
+  display: flex;
+  gap: 0.2rem;
+  align-items: center;
+}
+
+.header-search > div > input {
+  border: none;
+  width: 20rem;
+  padding: 0.4rem;
+  font-size: 0.9rem;
+}
+
+.header-search > div > input::placeholder {
+  /* width: */
+  color: rgba(0, 0, 0, 0.28);
+}
+
+.header-menu {
+  /* background-color: lightsalmon; */
+  display: grid;
+  align-content: center;
+  padding-left: 4rem;
+}
+
+.header-menu__btn {
+  background: #ff4742;
+  border: 1px solid #ff4742;
+  border-radius: 6px;
+  box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+  box-sizing: border-box;
+  color: #ffffff;
+  cursor: pointer;
+  display: inline-block;
+  font-family: nunito, roboto, proxima-nova, "proxima nova", sans-serif;
+  font-size: 0.8rem;
+  font-weight: 800;
+  line-height: 16px;
+  min-height: 40px;
+  outline: 0;
+  padding: 12px 14px;
+  text-align: center;
+  text-rendering: geometricprecision;
+  text-transform: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: middle;
+  width: 8rem;
+}
+
+.header-menu__btn:hover,
+.header-menu__btn:active {
+  background-color: initial;
+  background-position: 0 0;
+  color: #ff4742;
+}
+
+.header-menu__btn:active {
+  opacity: 0.5;
+}
+
+.profile__hero {
+  /* background-color: lightcoral; */
+  background-image: url("../../assets/images/pexels-robin-stickel-70497.jpg");
+  background-size: cover;
+  background-position: center;
+  grid-area: hero;
+  position: relative;
+}
+
+.profile__hero > div {
+  width: 15rem;
+  height: 15rem;
+  background-color: white;
+  position: absolute;
+  border-radius: 50%;
+  top: 11rem;
+  left: 10rem;
+  box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.348);
+  padding: 0.2rem;
+  z-index: 1100;
+}
+
+.profile__hero > div > img {
+  width: 100%;
+  border-radius: 50%;
+}
+
+.profile__presentation {
+  grid-area: presentation;
+  box-shadow: 1px 1px 5px 1px rgba(0, 0, 0, 0.348);
+  z-index: 1000;
+}
+
+.profile__main-content {
+  background-color: lightgoldenrodyellow;
+  grid-area: main;
 }
