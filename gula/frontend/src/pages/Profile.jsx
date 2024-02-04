@@ -8,38 +8,63 @@ import { CiLocationOn } from "react-icons/ci";
 import { FaFacebookF } from "react-icons/fa";
 import { FaInstagram } from "react-icons/fa";
 import { FaTwitter } from "react-icons/fa";
+import { FaLocationDot } from "react-icons/fa6";
+import { AiFillInstagram } from "react-icons/ai";
 
 function Profile() {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState([]);
   const { profilename } = useParams();
+  const refreshToken = localStorage.getItem("refreshToken");
+  const token = localStorage.getItem("token");
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
-
-    try {
-      fetch(`http://localhost:3070/api/v1/auth/profile/${profilename}`, {
-        method: "GET",
-        headers: {
-          authorization: `Bearer ${token}`,
-        },
+    renewAccessToken();
+    fetch(`http://localhost:3070/api/v1/auth/profile/${profilename}`, {
+      method: "GET",
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+    })
+      .then((response) => {
+        setLoading(false);
+        if (!refreshToken && !response.ok) {
+          throw new Error();
+        }
+        return response.json();
       })
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error("Unauthorizated");
-          }
-          return response.json();
-        })
-        .then((data) => {
-          console.log(data);
-          setUser(data);
-          setLoading(false);
-        });
-    } catch (error) {
-      setError(true);
-    }
+      .then((data) => {
+        setUser(data);
+      })
+      .catch((error) => {
+        setError(true);
+      });
   }, []);
+
+  const renewAccessToken = () => {
+    fetch("http://localhost:3070/api/v1/auth/refresh-token", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ refreshToken }),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error();
+        }
+        return response.json();
+      })
+      .then((data) => {
+        localStorage.setItem("token", data.token);
+      })
+      .catch((error) => {
+        setError(true);
+      });
+  };
+
+  useEffect(() => {
+    renewAccessToken();
+  }, [token, refreshToken]);
 
   if (error) {
     return <h1>Error</h1>;
@@ -86,13 +111,13 @@ function Profile() {
             <p>Rotiseria "Tirale los bigotes a Juan"</p>
             <div>
               <p>
-                <CiLocationOn /> Benito Juarez, Buenos Aires
+                <FaLocationDot /> Benito Juarez, Buenos Aires
               </p>
               <p>
                 <FaFacebookF /> tomas_cardenas
               </p>
               <p>
-                <FaInstagram /> tomicardenas96
+                <AiFillInstagram /> tomicardenas96
               </p>
               <p>
                 <FaTwitter /> tomi_cardenas

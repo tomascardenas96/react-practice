@@ -35,11 +35,17 @@ function Login() {
           }
           setLoading(false);
           localStorage.setItem("token", data.token);
+          localStorage.setItem("refreshToken", data.refreshToken);
         });
     } catch (error) {
       throw new Error(error);
     }
   };
+
+
+  // console.log('token ' + token)
+  // console.log('refresh token' + refreshToken)
+
 
   if (loading) {
     <h1>Loading</h1>;
@@ -60,7 +66,10 @@ function Login() {
           <div className="login-page__side-slogan">
             <h1>Bienvenido/a! a la primera App de pedidos de Benito Juarez</h1>
             <h2>Tenes hambre? Tenes</h2>
-            <img src="../../assets/images/Logo-Gula-blanco.png" alt="gula-logo" />
+            <img
+              src="../../assets/images/Logo-Gula-blanco.png"
+              alt="gula-logo"
+            />
           </div>
           <div className="login-page__divider-line" />
           <div className="login-page__login-form">
@@ -80,7 +89,9 @@ function Login() {
               </label>
               <div className="login-page__form-button">
                 <input type="submit" value="Entrar" />
-                <Link to="/register"><p>¿Todavia no tenes cuenta? Registrate gratis</p></Link>
+                <Link to="/register">
+                  <p>¿Todavia no tenes cuenta? Registrate gratis</p>
+                </Link>
               </div>
             </form>
           </div>

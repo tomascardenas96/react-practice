@@ -7,9 +7,7 @@ function DropdownMenu() {
   const activeProfileName = localStorage.getItem('profilename');
 
   const handleLogOut = () => {
-    localStorage.removeItem("username");
-    localStorage.removeItem("token");
-    localStorage.removeItem("permission");
+    localStorage.clear();
     location.reload();
   };
 
