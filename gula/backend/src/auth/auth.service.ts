@@ -2,6 +2,7 @@ import {
   Injectable,
   BadRequestException,
   UnauthorizedException,
+  NotFoundException,
 } from '@nestjs/common';
 import { RegisterDto } from './dto/register.dto';
 import { UserService } from 'src/user/user.service';
@@ -35,8 +36,8 @@ export class AuthService {
     return {
       email: user.email,
       username: user.username,
-      message: 'Register succesfull'
-    }
+      message: 'Register succesfull',
+    };
   }
 
   async login({ email, password }: LoginDto) {
@@ -49,7 +50,13 @@ export class AuthService {
       throw new UnauthorizedException('Incorrect password');
     }
 
-    const payload = { userId: user.userId, profilename: user.profilename, username: user.username, permission: user.permission };
+    const payload = {
+      userId: user.userId,
+      profilename: user.profilename,
+      username: user.username,
+      permission: user.permission,
+    };
+
     const secretKey = process.env.JWT_SECRET;
     if (!secretKey) {
       throw new UnauthorizedException();
@@ -58,11 +65,42 @@ export class AuthService {
     const token = await this.jwtService.signAsync(payload, {
       secret: secretKey,
     });
+    const refreshToken = await this.jwtService.signAsync(payload, {
+      secret: secretKey,
+      expiresIn: '20s',
+    });
 
     return {
       token,
+      refreshToken,
       email,
       message: 'success',
     };
+  }
+
+  async refreshToken(refreshToken: string) {
+    try {
+      const decodedToken = await this.jwtService.decode(refreshToken);
+      const payload = {
+        userId: decodedToken.userId,
+        profilename: decodedToken.profilename,
+        username: decodedToken.username,
+        permission: decodedToken.permission,
+      };
+
+      const secretKey = process.env.JWT_SECRET;
+
+      const token = await this.jwtService.signAsync(payload, {
+        secret: secretKey,
+      });
+
+      await this.jwtService.verifyAsync(refreshToken, {
+        secret: secretKey,
+      });
+
+      return token;
+    } catch (error) {
+      throw new UnauthorizedException('Invalid refresh token');
+    }
   }
 }
