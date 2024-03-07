@@ -33,10 +33,10 @@ export class PostController {
     return this.postService.findAll();
   }
 
-  @Get()
-  findAllOfUser(@ActiveUser() user: ActiveUserInterface) {
-    return this.postService.findAllOfUser(user);
-  }
+  // @Get()
+  // findAllOfUser(@ActiveUser() user: ActiveUserInterface) {
+  //   return this.postService.findAllOfUser(user);
+  // }
 
   @Get('/:profilename')
   findPostsByProfileName(@Param('profilename') profilename: string) {
