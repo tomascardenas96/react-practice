@@ -38,15 +38,15 @@ export class PostService {
     return this.postRepository.find();
   }
 
-  // findAllOfUser(user: ActiveUserInterface) {
-  //   if (user.permission === UserPermission.ADMIN) {
-  //     return this.postRepository.find();
-  //   }
+  findAllOfUser(user: ActiveUserInterface) {
+    if (user.permission === UserPermission.ADMIN) {
+      return this.postRepository.find();
+    }
 
-  //   return this.postRepository.find({
-  //     where: { userId: user.userId },
-  //   });
-  // }
+    return this.postRepository.find({
+      where: { userId: user.userId },
+    });
+  }
 
   async findPostsByProfileName(profilename: string) {
     const user = await this.userService.findByProfileName(profilename);

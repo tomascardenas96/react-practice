@@ -24,6 +24,18 @@ export class CategoryService {
     }
   }
 
+  getCategoryByName(name: string) {
+    const foundCategory = this.categoryRepository.findOne({
+      where: { description: name },
+    });
+
+    if (!foundCategory) {
+      throw new NotFoundException('Category not found');
+    }
+
+    return foundCategory;
+  }
+
   findOne(id: number) {
     return `This action returns a #${id} category`;
   }

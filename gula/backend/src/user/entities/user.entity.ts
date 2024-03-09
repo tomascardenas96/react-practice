@@ -1,7 +1,16 @@
 import { UserPermission } from '../../common/enum/permission.enum';
-import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  OneToMany,
+  OneToOne,
+  JoinColumn,
+} from 'typeorm';
 import { UserRole } from '../../common/enum/role.enum';
 import { Post } from '../../post/entities/post.entity';
+import { Shop } from 'src/shops/entities/shop.entity';
+import { Cart } from 'src/cart/entities/cart.entity';
 
 @Entity()
 export class User {
@@ -36,6 +45,12 @@ export class User {
   })
   permission: UserPermission;
 
-  @OneToMany(()=> Post, (post) => post.userId, {onDelete: 'CASCADE'})
+  @OneToMany(() => Post, (post) => post.userId, { onDelete: 'CASCADE' })
   post: Post[];
+
+  @OneToMany(() => Shop, (shop) => shop.user, { onDelete: 'CASCADE' })
+  shop: Shop[];
+
+  @OneToOne(() => Cart, (cart) => cart.user, { onDelete: 'CASCADE' })
+  cart: Cart;
 }

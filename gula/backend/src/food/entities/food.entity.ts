@@ -1,5 +1,6 @@
+import { Cart } from 'src/cart/entities/cart.entity';
 import { Category } from 'src/category/entities/category.entity';
-import { Post } from 'src/post/entities/post.entity';
+import { Shop } from 'src/shops/entities/shop.entity';
 import {
   Entity,
   PrimaryGeneratedColumn,
@@ -23,12 +24,18 @@ export class Food {
   @Column({ default: 0 })
   stock: number;
 
-  @ManyToMany(() => Post, (post) => post.food, { onDelete: 'CASCADE' })
-  post: Post[];
-
   @ManyToOne(() => Category, (category) => category.food, {
     onDelete: 'CASCADE',
   })
-  @JoinColumn({ name: 'categoryId' })
+  @JoinColumn({ name: 'category' })
   category: Category;
+
+  @ManyToOne(() => Shop, (shop) => shop.food, { onDelete: 'CASCADE' })
+  @JoinColumn({
+    name: 'shop',
+  })
+  shop: Shop;
+
+  @ManyToMany(() => Cart, (cart) => cart.food, { onDelete: 'CASCADE' })
+  cart: Cart[];
 }

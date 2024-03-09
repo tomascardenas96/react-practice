@@ -5,9 +5,9 @@ import { AuthModule } from './auth/auth.module';
 import { PostModule } from './post/post.module';
 import { CategoryModule } from './category/category.module';
 import { FoodModule } from './food/food.module';
-// import { MulterModule } from '@nestjs/platform-express';
 import { SocketsModule } from './sockets/sockets.module';
-
+import { ShopsModule } from './shops/shops.module';
+import { CartModule } from './cart/cart.module';
 @Module({
   imports: [
     UserModule,
@@ -26,6 +26,8 @@ import { SocketsModule } from './sockets/sockets.module';
     CategoryModule,
     FoodModule,
     SocketsModule,
+    ShopsModule,
+    CartModule,
   ],
   controllers: [],
   providers: [],
