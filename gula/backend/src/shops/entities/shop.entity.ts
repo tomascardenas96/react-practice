@@ -23,6 +23,9 @@ export class Shop {
   @Column()
   phone: string;
 
+  @Column()
+  profileName: string;
+
   @ManyToOne(() => User, (user) => user.shop, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'user' })
   user: User;

@@ -34,7 +34,7 @@ export class ShopsController {
   }
 
   @Get('/user')
-  findOne(@ActiveUser() user: ActiveUserInterface) {
+  getAllByUser(@ActiveUser() user: ActiveUserInterface) {
     return this.shopsService.getAllByUser(user);
   }
 

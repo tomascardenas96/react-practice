@@ -1,11 +1,18 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  NotFoundException,
+} from '@nestjs/common';
 import { FoodService } from './food.service';
 import { CreateFoodDto } from './dto/create-food.dto';
 import { UpdateFoodDto } from './dto/update-food.dto';
 import { Auth } from 'src/common/decorators/auth.decorator';
 import { UserPermission } from 'src/common/enum/permission.enum';
-import { ActiveUser } from 'src/common/decorators/active-user.decorator';
-import { ActiveUserInterface } from 'src/common/interfaces/active-user.interface';
 
 @Auth(UserPermission.USER)
 @Controller('food')
@@ -17,14 +24,14 @@ export class FoodController {
     return this.foodService.create(createFoodDto);
   }
 
-  @Get()
-  findAll() {
-    return this.foodService.findAll();
+  @Get('/filter/:filter')
+  findByFilter(@Param('filter') filter: string) {
+    return this.foodService.findByFilter(filter);
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.foodService.findOne(+id);
+  @Get('/shop/:shopName')
+  findByShop(@Param('shopName') shopName: string) {
+    return this.foodService.findByShop(shopName);
   }
 
   @Patch(':id')

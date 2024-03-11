@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  Injectable,
+  NotFoundException,
+  BadRequestException,
+} from '@nestjs/common';
 import { CreateShopDto } from './dto/create-shop.dto';
 import { UpdateShopDto } from './dto/update-shop.dto';
 import { Shop } from './entities/shop.entity';
@@ -19,9 +23,14 @@ export class ShopsService {
     user: ActiveUserInterface,
   ): Promise<Shop> {
     const foundUser = await this.userService.findByUserName(user.username);
+    const parsedShopName = createShopDto.name
+      .split(' ')
+      .join('-')
+      .toLowerCase();
 
     const newShop = {
       ...createShopDto,
+      profileName: parsedShopName,
       user: foundUser,
     };
     return await this.shopRepository.save(newShop);
@@ -40,9 +49,21 @@ export class ShopsService {
   }
 
   async getShopByName(name: string) {
-    const foundShop = await this.shopRepository.findOne({where: { name }});
-    if(!foundShop) {
-      throw new NotFoundException('Shop not found')
+    const foundShop = await this.shopRepository.findOne({ where: { name } });
+    if (!foundShop) {
+      throw new NotFoundException('Shop not found');
+    }
+
+    return foundShop;
+  }
+
+  async getShopByProfileName(profileName: string) {
+    const foundShop = await this.shopRepository.findOne({
+      where: { profileName },
+      relations: ['user']
+    });
+    if (!foundShop) {
+      throw new NotFoundException('Shop not found');
     }
 
     return foundShop;

@@ -1,10 +1,9 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateFoodDto } from './dto/create-food.dto';
 import { UpdateFoodDto } from './dto/update-food.dto';
-import { ActiveUserInterface } from 'src/common/interfaces/active-user.interface';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Food } from './entities/food.entity';
-import { Repository } from 'typeorm';
+import { ILike, Repository } from 'typeorm';
 import { ShopsService } from 'src/shops/shops.service';
 import { CategoryService } from 'src/category/category.service';
 
@@ -24,7 +23,6 @@ export class FoodService {
     if (!shop) {
       throw new NotFoundException('Shop not found');
     }
-
     if (!category) {
       throw new NotFoundException('Category not found');
     }
@@ -32,18 +30,39 @@ export class FoodService {
     const newFood = {
       ...createFoodDto,
       shop,
-      category
+      category,
     };
 
     return this.foodRepository.save(newFood);
   }
 
-  findAll() {
-    return `This action returns all food`;
+  async findByFilter(filter: string) {
+    const food = await this.foodRepository.find({
+      where: {
+        description: ILike(`%${filter}%`),
+      },
+      relations: ['shop'],
+    });
+    if (!food.length) {
+      throw new NotFoundException('No coincidences');
+    }
+
+    return food;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} food`;
+  async findByShop(shopName: string) {
+    const food = await this.foodRepository.find({
+      where: {
+        shop: {
+          profileName: shopName,
+        },
+      },
+    });
+    if (!food.length) {
+      throw new NotFoundException("This commerce doesn't have menu yet");
+    }
+
+    return food;
   }
 
   update(id: number, updateFoodDto: UpdateFoodDto) {
