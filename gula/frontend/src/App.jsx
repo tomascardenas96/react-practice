@@ -4,6 +4,7 @@ import Home from "./pages/Home";
 import Profile from "./pages/Profile";
 import Protected from "./components/Protected";
 import Register from "./pages/Register";
+import Shop from "./pages/Shop";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
             <Route element={<Protected permission="user" />}>
               <Route exact path="/home" element={<Home />} />
               <Route exact path='/profile/:profilename' element={<Profile />} />
+              <Route exact path='/commerce/:commerce' element={<Shop />} />
               <Route exact path="/*" element={<h1>Pagina no encontrada</h1>} />
             </Route>
           </Routes>

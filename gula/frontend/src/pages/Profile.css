@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400..700;1,400..700&display=swap');
+
 
 .profile__container {
   min-height: 100svh;
@@ -15,7 +15,7 @@
   grid-area: header;
   display: grid;
   grid-template-columns: 3fr 9fr 4fr;
-  box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.348);
+  box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.069);
   z-index: 1000;
 }
 
@@ -53,6 +53,7 @@
   width: 20rem;
   padding: 0.4rem;
   font-size: 0.9rem;
+  font-family: "Noto Sans Lao Looped", sans-serif;
 }
 
 .header-search > div > input::placeholder {
@@ -160,11 +161,13 @@
 
 .profile__presentation-user-info > h1 {
     font-size: 2.2rem;
+    font-weight: 400;
 }
 
 .profile__presentation-user-info > h1,
 .profile__presentation-user-info > p {
     margin-left: .3rem;
+    font-family: "Noto Sans Lao Looped", sans-serif;
 }
 
 .profile__presentation-user-info > div > p {

@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Lao+Looped:wght@100..900&display=swap');
+
 .header__container {
   width: 100%;
   display: flex;
@@ -9,7 +11,7 @@
   height: 6rem;
   margin: 0.5rem;
   border-radius: 0.3rem;
-  border: 1px solid rgba(48, 48, 48, 0.77);
+  border: 1px solid rgba(48, 48, 48, 0.522);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -21,7 +23,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  border-right: 1px solid rgba(48, 48, 48, 0.77);
+  border-right: 1px solid rgba(48, 48, 48, 0.522);
   font-size: 2rem;
   color: black;
   cursor: pointer;
@@ -37,7 +39,7 @@
 }
 
 .header__container-username {
-  border-left: 1px solid rgba(48, 48, 48, 0.77);
+  border-left: 1px solid rgba(48, 48, 48, 0.522);
   width: 16rem;
   height: 80%;
   display: flex;
@@ -50,11 +52,12 @@
 
 .header__container-username > p {
   color: black;
-  font-size: 1.1rem;
-  font-weight: 600;
+  font-size: 1rem;
+  font-weight: 400;
   display: flex;
   align-items: flex-end;
   gap: 0.4rem;
+  font-family: "Noto Sans Lao Looped", sans-serif;
 }
 
 .menu-arrow {

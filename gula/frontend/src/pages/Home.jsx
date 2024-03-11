@@ -8,10 +8,12 @@ import FoodTrades from "../components/FoodTrades";
 import Footer from "../components/Footer";
 import NewPost from "../components/NewPost";
 import HomePagePosts from "../components/HomePagePosts";
+import useFilter from "../hooks/useFilter";
 
 function Home() {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
+  // const { filteredFood, filterError, filterLoading } = useFilter();
 
   useEffect(() => {
     const token = localStorage.getItem("token");

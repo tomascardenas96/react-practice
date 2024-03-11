@@ -1,48 +1,64 @@
 .header-filter__container {
-    display: flex;
-    width: 100%;
-    justify-content: center;
+  display: flex;
+  width: 100%;
+  justify-content: center;
 }
 
 .header-filter__container > .header-filter {
-    background: #fe4444fb;
-    width: 99%;
-    min-height: 20rem;
-    border-radius: 0.3rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+  background: #fe4444fb;
+  width: 99%;
+  min-height: 20rem;
+  border-radius: 0.3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .header-filter > div {
-    height: 80%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 2rem;
+  height: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2rem;
 }
 
 .header-filter h1 {
-    color: var(--font-color);
-    font-size: 2.2rem;
-    letter-spacing: .1rem;
-    filter: drop-shadow(1px 1px 1px black);
+  color: var(--font-color);
+  font-size: 2.2rem;
+  letter-spacing: 0.1rem;
+  filter: drop-shadow(1px 1px 1px black);
+}
+
+.header-filter form {
+  position: relative;
 }
 
 .header-filter input {
-    height: 2.5rem;
-    border: none;
-    border-radius: .2rem;
-    padding-left: 1rem;
-    font-size: 1.3rem;
+  height: 2.5rem;
+  border: none;
+  border-radius: 0.2rem;
+  padding-left: 1rem;
+  font-size: 1.3rem;
+  width: 100%;
 }
 
 .header-filter input::placeholder {
-    font-size: 1.3rem;
-    color: rgba(0, 0, 0, 0.273);
+  font-size: 1.3rem;
+  color: rgba(0, 0, 0, 0.273);
 }
 
 .header-filter input:focus {
-    outline: 2px solid black;
+  outline: 2px solid black;
+}
+
+.header-filter__results {
+    width: 35rem;
+    height: 10rem;
+    position: absolute;
+    background-color: rgb(56, 56, 56);
+    top: 2.7rem;
+    left: 50%;
+    right: 50%;
+    transform: translate(-50%, 0);
 }

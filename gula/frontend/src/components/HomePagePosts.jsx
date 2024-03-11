@@ -10,13 +10,12 @@ const HomePagePosts = () => {
 
   useEffect(() => {
     fetchPosts();
-    const socket = io("http://localhost:8001"); // Reemplaza 'http://localhost:8001' con la URL de tu servidor WebSocket
+    const socket = io("http://localhost:8001");
 
     socket.on("nuevaPublicacion", (nuevaPublicacion) => {
       setPosts((prevPosts) => [...prevPosts, nuevaPublicacion]);
     });
 
-    console.log("render")
     return () => {
       socket.disconnect();
     };

@@ -4,11 +4,23 @@
   position: absolute;
   right: 0.5rem;
   top: 6rem;
-  height: 12rem;
   border: 1px solid black;
   border-radius: 0.3rem;
   display: flex;
   justify-content: center;
+  padding: 0.1rem 0;
+  animation: slideInOut 1s ease forwards;
+  max-height: 0; 
+  overflow: hidden;
+}
+
+@keyframes slideInOut {
+  from {
+    max-height: 0; 
+  }
+  to {
+    max-height: 100%;
+  }
 }
 
 .dropdown-menu__container ul {
@@ -26,11 +38,41 @@
 
 .dropdown-menu__container ul li {
   padding: 0.85rem;
-  width: 100%;
   display: flex;
-  justify-content: space-between;
   border-bottom: 1px solid rgba(0, 0, 0, 0.089);
   font-size: 0.9rem;
   color: rgba(0, 0, 0, 0.704);
   cursor: pointer;
+}
+
+.dropdown-menu__container li.dropdown-menu__shops {
+  display: flex;
+  gap: 0.4rem;
+  font-size: 0.95rem;
+  align-items: center;
+  color: rgba(0, 0, 0, 0.686);
+  padding: 1rem 0.85rem;
+  cursor: default;
+  & div {
+    display: flex;
+    font-size: 1.3rem;
+    color: rgba(199, 3, 3, 0.491);
+  }
+}
+
+.dropdown-menu__container li.shop-item {
+  display: flex;
+  gap: 0.6rem;
+  font-size: 0.9rem;
+  color: rgba(0, 0, 0, 0.619);
+  /* background-color: green; */
+  align-items: center;
+
+}
+
+.shop-item__icon {
+  border: 1px solid black;
+  width: 2.3rem;
+  height: 2.3rem;
+  border-radius: 50%;
 }
