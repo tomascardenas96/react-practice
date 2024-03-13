@@ -37,6 +37,8 @@ function useShop() {
     getShop();
   }, [commerce, token]);
 
+
+
   return { shop, error, loading };
 }
 

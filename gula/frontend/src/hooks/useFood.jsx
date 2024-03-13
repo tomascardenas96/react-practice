@@ -7,13 +7,20 @@ function useFood(activeShop) {
   const [menu, setMenu] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [newFood, setNewFood] = useState({
+    description: "",
+    price: undefined,
+    stock: undefined,
+    category: "",
+    shop: activeShop.name,
+  });
 
   useEffect(() => {
+    setLoading(true);
     const getFood = async () => {
       try {
-        setLoading(true);
         const response = await fetch(
-          `http://localhost:3070/api/v1/food/shop/${activeShop}`,
+          `http://localhost:3070/api/v1/food/shop/${activeShop.profileName}`,
           {
             method: "GET",
             headers: {
@@ -34,12 +41,35 @@ function useFood(activeShop) {
       }
     };
 
-    if (activeShop !== undefined) {
+    if (activeShop.profileName !== undefined && activeShop.name !== undefined) {
       getFood();
     }
   }, [shop, token]);
 
-  return { menu, loading, error };
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setNewFood({ ...newFood, [name]: value });
+  };
+
+  const handleSubmit = async () => {
+    try {
+      const response = await fetch("http://localhost:3070/api/v1/food", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(newFood),
+      });
+      const parsedResponse = await response.json();
+      return parsedResponse;
+    } catch (err) {
+      console.log(err);
+    } finally {
+    }
+  };
+
+  return { menu, loading, error, handleChange, handleSubmit, newFood };
 }
 
 export default useFood;

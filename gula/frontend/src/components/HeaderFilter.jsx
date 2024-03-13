@@ -4,13 +4,13 @@ import useFilter from "../hooks/useFilter";
 
 function HeaderFilter() {
   const {
+    isEmptyField,
     filteredFood,
     filterError,
     filterLoading,
     getFilteredFood,
     filterInput,
     handleChange,
-    isEmptyField,
   } = useFilter();
 
   return (
@@ -25,13 +25,26 @@ function HeaderFilter() {
               value={filterInput}
               onChange={handleChange}
             />
-            {!isEmptyField && !filterError && (
+            {!isEmptyField && (
               <div className="header-filter__results">
-                <ul>
-                  {filteredFood.map((food) => (
-                    <p key={food.foodId}>{food.description}</p>
-                  ))}
-                </ul>
+                {!filterError ? (
+                  filteredFood.map((food, idx) => (
+                    <ul key={idx} className="header-filter__results-list">
+                      <li className="results-img">
+                        <img className="img" src="https://img.freepik.com/vector-gratis/deliciosa-comida-rapida-estilo-pop-art_24908-61615.jpg?size=338&ext=jpg&ga=GA1.1.117944100.1709856000&semt=ais" alt="imagen-de-prueba"  />
+                      </li>
+                      <li className="results-description">
+                        {food.description}
+                      </li>
+                      <li className="results-price">${food?.price}</li>
+                      <li className="results-shop">{food.shop?.name}</li>
+                    </ul>
+                  ))
+                ) : (
+                  <div className="header-filter__no-results">
+                    <p>Sin resultados</p>
+                  </div>
+                )}
               </div>
             )}
           </form>

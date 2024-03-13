@@ -6,7 +6,7 @@ function useFilter() {
   const [filterError, setFilterError] = useState(null);
   const [filterLoading, setFilterLoading] = useState(false);
   const [filterInput, setFilterInput] = useState("");
-  
+
   const getFilteredFood = async (filterInput) => {
     setFilterError(null);
     try {
@@ -23,6 +23,7 @@ function useFilter() {
       );
       const parsedResponse = await response.json();
       if (parsedResponse.error) {
+        setFilteredFood(["No hay resultados"]);
         throw new Error("No results found");
       }
       setFilteredFood(parsedResponse);
@@ -40,12 +41,6 @@ function useFilter() {
   };
 
   const isEmptyField = filterInput === "";
-
-  useEffect(() => {
-    if (isEmptyField) {
-      setFilteredFood([]);
-    }
-  }, []);
 
   return {
     filteredFood,
