@@ -1,9 +1,9 @@
 import useFood from "../hooks/useFood";
 import useShop from "../hooks/useShop";
+import NewPost from "../components/NewPost"
 import "./Shop.css";
 
 function Shop() {
-  const activeUserEmail = localStorage.getItem("email");
   const { shop } = useShop();
   const {
     menu,
@@ -13,13 +13,13 @@ function Shop() {
     handleChangeNumber,
     handleSubmit,
     newFood,
-    isActive
+    isShopOwner
   } = useFood(shop);
 
   return (
     <>
       <h1>{shop.name}</h1>
-      {isActive && (
+      {isShopOwner && (
         <form onSubmit={handleSubmit}>
           <label htmlFor="description">
             Descripcion:
@@ -75,6 +75,7 @@ function Shop() {
       ) : (
         <p>No hay comida aun</p>
       )}
+      <NewPost />
     </>
   );
 }

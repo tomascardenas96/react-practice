@@ -1,10 +1,12 @@
 import "./styles/NewPost.css";
 import React, { useState } from "react";
 import Spinner from "./Spinner";
-import { Toaster, toast } from 'sonner' 
+import { Toaster, toast } from "sonner";
+import useShop from "../hooks/useShop";
 
 function NewPost() {
   const token = localStorage.getItem("token");
+  const { shop } = useShop();
   const [post, setPost] = useState({
     description: "",
   });
@@ -20,7 +22,7 @@ function NewPost() {
     e.preventDefault();
     setLoading(true);
     try {
-      fetch("http://localhost:3070/api/v1/post", {
+      fetch(`http://localhost:3070/api/v1/post/shop/${shop.profileName}`, {
         method: "POST",
         headers: {
           authorization: `Bearer ${token}`,
@@ -37,7 +39,7 @@ function NewPost() {
           return response.json();
         })
         .then((data) => {
-          toast.success('Publicacion enviada');
+          toast.success("Publicacion enviada");
           setLoading(false);
         });
     } catch (error) {
@@ -66,7 +68,7 @@ function NewPost() {
         </div>
       </form>
       {error && <h1>Error</h1>}
-      <Toaster expand={true}/>
+      <Toaster expand={true} />
     </>
   );
 }

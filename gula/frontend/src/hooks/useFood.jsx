@@ -6,7 +6,7 @@ function useFood() {
   const token = localStorage.getItem("token");
   const activeUserEmail = localStorage.getItem("email");
   const { shop } = useShop();
-  const [isActive, setIsActive] = useState(false);
+  const [isShopOwner, setIsShopOwner] = useState(false);
   const [menu, setMenu] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -97,10 +97,10 @@ function useFood() {
   useEffect(() => {
     const isActiveUserOwnerOfShop = () => {
       if (activeUserEmail === shop.user.email) {
-        setIsActive(true);
+        setIsShopOwner(true);
         return;
       }
-      setIsActive(false);
+      setIsShopOwner(false);
     };
 
     if (shop.user) {
@@ -116,7 +116,7 @@ function useFood() {
     handleChangeNumber,
     handleSubmit,
     newFood,
-    isActive,
+    isShopOwner,
   };
 }
 

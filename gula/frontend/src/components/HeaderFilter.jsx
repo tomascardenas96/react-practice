@@ -1,6 +1,7 @@
 import React from "react";
 import "./styles/HeaderFilter.css";
 import useFilter from "../hooks/useFilter";
+import { BsCartPlus } from "react-icons/bs";
 
 function HeaderFilter() {
   const {
@@ -38,6 +39,7 @@ function HeaderFilter() {
                       </li>
                       <li className="results-price">${food?.price}</li>
                       <li className="results-shop">{food.shop?.name}</li>
+                      <li className="results-addtocart"><BsCartPlus /></li>
                     </ul>
                   ))
                 ) : (

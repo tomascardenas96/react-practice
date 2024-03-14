@@ -47,7 +47,7 @@ const HomePagePosts = () => {
       <div className="home-page-posts__header">
         <h1>Publicaciones</h1>
       </div>
-      <NewPost />
+      {/* <NewPost /> */}
       <div className="home-page-posts__publications-container">
         {posts
           .slice()
@@ -55,7 +55,7 @@ const HomePagePosts = () => {
           .map((post, idx) => (
             <PublicationCard
               key={idx}
-              username={post.name}
+              username={post.shop.name}
               publication={post.description}
             />
           ))}
