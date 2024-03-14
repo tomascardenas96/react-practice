@@ -36,16 +36,15 @@ function Login() {
           setLoading(false);
           localStorage.setItem("token", data.token);
           localStorage.setItem("refreshToken", data.refreshToken);
+          localStorage.setItem("email", data.email);
         });
     } catch (error) {
       throw new Error(error);
     }
   };
 
-
   // console.log('token ' + token)
   // console.log('refresh token' + refreshToken)
-
 
   if (loading) {
     <h1>Loading</h1>;

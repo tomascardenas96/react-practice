@@ -1,57 +1,75 @@
 import { useEffect, useState } from "react";
 import useShop from "./useShop";
+import { io } from "socket.io-client";
 
-function useFood(activeShop) {
+function useFood() {
   const token = localStorage.getItem("token");
+  const activeUserEmail = localStorage.getItem("email");
   const { shop } = useShop();
+  const [isActive, setIsActive] = useState(false);
   const [menu, setMenu] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const [newFood, setNewFood] = useState({
     description: "",
-    price: undefined,
-    stock: undefined,
-    category: "",
-    shop: activeShop.name,
+    price: "",
+    stock: "",
+    category: "Carnes",
+    shop: shop.name,
   });
 
   useEffect(() => {
-    setLoading(true);
-    const getFood = async () => {
-      try {
-        const response = await fetch(
-          `http://localhost:3070/api/v1/food/shop/${activeShop.profileName}`,
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-              authorization: `Bearer ${token}`,
-            },
-          }
-        );
-        const parsedResponse = await response.json();
-        if (parsedResponse.error) {
-          throw new Error("This commerce doesn't have menu yet");
-        }
-        setMenu(parsedResponse);
-      } catch (err) {
-        setError(err);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    if (activeShop.profileName !== undefined && activeShop.name !== undefined) {
+    if (shop.profileName) {
       getFood();
-    }
-  }, [shop, token]);
+      const socket = io("http://localhost:8001");
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setNewFood({ ...newFood, [name]: value });
+      socket.on("newFood", (food) => {
+        setMenu((prevMenu) => [...prevMenu, food]);
+      });
+
+      return () => {
+        socket.disconnect();
+      };
+    }
+  }, [shop.profileName, newFood]);
+
+  const getFood = async () => {
+    try {
+      const response = await fetch(
+        `http://localhost:3070/api/v1/food/shop/${shop.profileName}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      const parsedResponse = await response.json();
+      if (parsedResponse.error) {
+        throw new Error("This commerce doesn't have menu yet");
+      }
+      setMenu(parsedResponse);
+    } catch (err) {
+      setError(err);
+    } finally {
+      setLoading(false);
+    }
   };
 
-  const handleSubmit = async () => {
+  const handleChangeString = (e) => {
+    const { name, value } = e.target;
+    setNewFood({ ...newFood, [name]: value, shop: shop.name });
+  };
+
+  const handleChangeNumber = (e) => {
+    const { name, value } = e.target;
+    setNewFood({ ...newFood, [name]: Number(value), shop: shop.name });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
     try {
       const response = await fetch("http://localhost:3070/api/v1/food", {
         method: "POST",
@@ -66,10 +84,40 @@ function useFood(activeShop) {
     } catch (err) {
       console.log(err);
     } finally {
+      setNewFood({
+        description: "",
+        price: "",
+        stock: "",
+        category: "Carnes",
+        shop: shop.name,
+      });
     }
   };
 
-  return { menu, loading, error, handleChange, handleSubmit, newFood };
+  useEffect(() => {
+    const isActiveUserOwnerOfShop = () => {
+      if (activeUserEmail === shop.user.email) {
+        setIsActive(true);
+        return;
+      }
+      setIsActive(false);
+    };
+
+    if (shop.user) {
+      isActiveUserOwnerOfShop();
+    }
+  }, [shop.user]);
+
+  return {
+    menu,
+    loading,
+    error,
+    handleChangeString,
+    handleChangeNumber,
+    handleSubmit,
+    newFood,
+    isActive,
+  };
 }
 
 export default useFood;
