@@ -20,12 +20,9 @@ import { ActiveUserInterface } from 'src/common/interfaces/active-user.interface
 export class PostController {
   constructor(private readonly postService: PostService) {}
 
-  @Post()
-  create(
-    @Body() createPostDto: CreatePostDto,
-    @ActiveUser() user: ActiveUserInterface,
-  ) {
-    return this.postService.create(createPostDto, user);
+  @Post('/shop/:shopProfileName')
+  create(@Body() createPostDto: CreatePostDto, @Param('shopProfileName') shopProfileName: string) {
+    return this.postService.create(createPostDto, shopProfileName);
   }
 
   @Get()
@@ -33,14 +30,11 @@ export class PostController {
     return this.postService.findAll();
   }
 
-  @Get('/user')
-  findAllOfUser(@ActiveUser() user: ActiveUserInterface) {
-    return this.postService.findAllOfUser(user);
-  }
-
-  @Get('/:profilename')
-  findPostsByProfileName(@Param('profilename') profilename: string) {
-    return this.postService.findPostsByProfileName(profilename);
+  @Get('/shop/:shopProfileName')
+  findAllByShop(
+    @ActiveUser() user: ActiveUserInterface, @Param('shopProfileName') shopProfileName: string
+  ) {
+    return this.postService.findAllByShop(user, shopProfileName);
   }
 
   @Patch(':id')

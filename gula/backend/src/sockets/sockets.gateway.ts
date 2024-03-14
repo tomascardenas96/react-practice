@@ -22,8 +22,11 @@ export class SocketsGateway
     console.log(`Cliente desconectado: ${client.id}`);
   }
 
-  // Método para manejar el evento 'nuevaPublicacion'
   handleNuevaPublicacion(payload: any) {
     this.server.emit('nuevaPublicacion', payload);
+  }
+
+  handleNewPostFood(payload: any) {
+    this.server.emit('newFood', payload)
   }
 }

@@ -6,10 +6,11 @@ import { SocketsGateway } from './sockets.gateway'; // Importa el gateway de soc
 export class SocketsService {
   constructor(private readonly socketsGateway: SocketsGateway) {}
 
-  // Método para emitir un evento 'nuevaPublicacion'
   async emitirEventoNuevaPublicacion(payload: any) {
     this.socketsGateway.handleNuevaPublicacion(payload);
   }
 
-  // Otros métodos para manejar eventos WebSocket...
+  async emitNewPostFood(payload: any) {
+    this.socketsGateway.handleNewPostFood(payload);
+  }
 }

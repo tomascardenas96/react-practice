@@ -8,6 +8,7 @@ import { ActiveUserInterface } from 'src/common/interfaces/active-user.interface
 import { UserPermission } from 'src/common/enum/permission.enum';
 import { UserService } from 'src/user/user.service';
 import { SocketsService } from 'src/sockets/sockets.service';
+import { ShopsService } from 'src/shops/shops.service';
 
 @Injectable()
 export class PostService {
@@ -15,17 +16,19 @@ export class PostService {
     @InjectRepository(Post)
     private readonly postRepository: Repository<Post>,
     private readonly userService: UserService,
+    private readonly shopService: ShopsService,
     private readonly socketsService: SocketsService,
   ) {}
 
-  async create(
-    createPostDto: CreatePostDto,
-    user: ActiveUserInterface,
-  ): Promise<Post> {
+  async create(createPostDto: CreatePostDto, shopProfileName: string): Promise<Post> {
+    const shop = await this.shopService.getShopByProfileName(shopProfileName);
+    if (!shop) {
+      throw new NotFoundException('Shop non-existent');
+    }
+
     const newPost = {
       ...createPostDto,
-      name: user.username,
-      userId: user.userId,
+      shop: shop,
     };
     const post = await this.postRepository.save(newPost);
 
@@ -35,26 +38,23 @@ export class PostService {
   }
 
   findAll() {
-    return this.postRepository.find();
+    return this.postRepository.find({ relations: ['shop'] });
   }
 
-  findAllOfUser(user: ActiveUserInterface) {
+  async findAllByShop(user: ActiveUserInterface, shopProfileName: string) {
     if (user.permission === UserPermission.ADMIN) {
       return this.postRepository.find();
     }
 
-    return this.postRepository.find({
-      where: { userId: user.userId },
-    });
-  }
-
-  async findPostsByProfileName(profilename: string) {
-    const user = await this.userService.findByProfileName(profilename);
-    if (!user) {
-      throw new NotFoundException('User not found, cannot show any post');
+    const shop = await this.shopService.getShopByProfileName(shopProfileName);
+    if (!shop) {
+      throw new NotFoundException('Shop non-existent');
     }
 
-    return this.postRepository.find({ where: { userId: Number(user.userId) } });
+    return this.postRepository.find({
+      where: { shop },
+      relations: ['shop'],
+    });
   }
 
   update(id: number, updatePostDto: UpdatePostDto) {

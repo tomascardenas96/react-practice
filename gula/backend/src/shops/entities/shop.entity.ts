@@ -1,4 +1,5 @@
 import { Food } from 'src/food/entities/food.entity';
+import { Post } from 'src/post/entities/post.entity';
 import { User } from 'src/user/entities/user.entity';
 import {
   Column,
@@ -32,4 +33,7 @@ export class Shop {
 
   @OneToMany(() => Food, (food) => food.shop, { onDelete: 'CASCADE' })
   food: Food[];
+
+  @OneToMany(() => Post, (post) => post.shop, { onDelete: 'CASCADE' })
+  post: Post[];
 }

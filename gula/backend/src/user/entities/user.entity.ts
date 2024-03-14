@@ -45,9 +45,6 @@ export class User {
   })
   permission: UserPermission;
 
-  @OneToMany(() => Post, (post) => post.userId, { onDelete: 'CASCADE' })
-  post: Post[];
-
   @OneToMany(() => Shop, (shop) => shop.user, { onDelete: 'CASCADE' })
   shop: Shop[];
 
