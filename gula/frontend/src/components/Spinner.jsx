@@ -3,12 +3,9 @@ import "./styles/Spinner.css"; // Asegúrate de tener un archivo CSS para estilo
 
 const Spinner = () => {
   return (
-    <div className="loadership_NPFGM">
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-        </div>
+    <div className="loader">
+        <img src="../../assets/images/Logo-gula-bg.png" alt="gula-loader" />
+    </div>
   );
 };
 

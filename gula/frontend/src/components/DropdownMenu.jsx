@@ -1,12 +1,14 @@
 import "./styles/DropdownMenu.css";
 import { CiShop } from "react-icons/ci";
+import Spinner from "./Spinner";
 
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, Navigate } from "react-router-dom";
 import useShops from "../hooks/useShops";
 
 function DropdownMenu() {
   const { shops, error, loading } = useShops();
+  const [isLoading, setIsLoading] = useState(false);
   const activeProfileName = localStorage.getItem("profilename");
 
   const handleLogOut = () => {

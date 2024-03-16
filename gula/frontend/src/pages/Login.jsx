@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { Link, Navigate } from "react-router-dom";
 import "./Login.css";
+import useCart from "../hooks/useCart";
 
 function Login() {
+  const token = localStorage.getItem("token");
+  const { handleCart, cartError } = useCart();
   const [user, setUser] = useState({
     email: "",
     password: "",
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
-  const token = localStorage.getItem("token");
 
   const handleChange = (e) => {
     const { value, name } = e.target;
@@ -37,14 +39,12 @@ function Login() {
           localStorage.setItem("token", data.token);
           localStorage.setItem("refreshToken", data.refreshToken);
           localStorage.setItem("email", data.email);
+          handleCart(data.email);
         });
     } catch (error) {
       throw new Error(error);
     }
   };
-
-  // console.log('token ' + token)
-  // console.log('refresh token' + refreshToken)
 
   if (loading) {
     <h1>Loading</h1>;

@@ -10,6 +10,10 @@ function useFilter() {
   const getFilteredFood = async (filterInput) => {
     setFilterError(null);
     try {
+      //Para que no se ejecute la funcion cuando el input esta vacio.
+      if (!filterInput) {
+        return;
+      }
       setFilterLoading(true);
       const response = await fetch(
         `http://localhost:3070/api/v1/food/filter/${filterInput}`,
@@ -36,6 +40,10 @@ function useFilter() {
 
   const handleChange = (e) => {
     const { value } = e.target;
+    //Para que no permita al usuario hacer espacio cuando el input este vacio.
+    if (value.trim() === "" && value !== "") {
+      return;
+    }
     setFilterInput(value);
     getFilteredFood(value);
   };

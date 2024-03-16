@@ -13,7 +13,6 @@ import useFilter from "../hooks/useFilter";
 function Home() {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
-  // const { filteredFood, filterError, filterLoading } = useFilter();
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -33,13 +32,16 @@ function Home() {
           return response.json();
         })
         .then((data) => {
-          setLoading(false);
           localStorage.setItem("username", data.username);
           localStorage.setItem("profilename", data.profilename);
           localStorage.setItem("permission", data.permission);
         });
     } catch (error) {
       setError(true);
+    } finally {
+      setTimeout(() => {
+        setLoading(false);
+      }, 1300);
     }
   }, []);
 

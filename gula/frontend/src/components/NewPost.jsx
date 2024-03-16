@@ -3,10 +3,12 @@ import React, { useState } from "react";
 import Spinner from "./Spinner";
 import { Toaster, toast } from "sonner";
 import useShop from "../hooks/useShop";
+import useFood from "../hooks/useFood";
 
 function NewPost() {
   const token = localStorage.getItem("token");
   const { shop } = useShop();
+  const { isShopOwner } = useFood()
   const [post, setPost] = useState({
     description: "",
   });
@@ -50,6 +52,8 @@ function NewPost() {
 
   return (
     <>
+    {
+      isShopOwner &&
       <form onSubmit={handleSubmit}>
         <textarea
           name="description"
@@ -59,7 +63,7 @@ function NewPost() {
           className="new-post__text-area"
           value={post.description}
           onChange={handleChange}
-        />
+          />
         <div className="new-post__submit">
           <div className="new-post__submit-spinner">
             {loading && <Spinner />}
@@ -67,6 +71,7 @@ function NewPost() {
           <input type="submit" value="Publicar" />
         </div>
       </form>
+        }
       {error && <h1>Error</h1>}
       <Toaster expand={true} />
     </>
