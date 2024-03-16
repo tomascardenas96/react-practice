@@ -15,7 +15,7 @@ export class Cart {
   @PrimaryGeneratedColumn()
   cartId: number;
 
-  @Column()
+  @Column({ default: 0 })
   total: number;
 
   @ManyToMany(() => Food, (food) => food.cart, {
@@ -25,13 +25,13 @@ export class Cart {
   @JoinTable({
     name: 'cart_food',
     joinColumn: {
-        name: 'cart',
-        referencedColumnName: 'cartId'
+      name: 'cart',
+      referencedColumnName: 'cartId',
     },
     inverseJoinColumn: {
-        name: 'food',
-        referencedColumnName: 'foodId'
-    }
+      name: 'food',
+      referencedColumnName: 'foodId',
+    },
   })
   food: Food[];
 

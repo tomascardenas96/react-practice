@@ -44,7 +44,7 @@ export class FoodService {
       relations: ['shop'],
     });
     if (!food.length) {
-      throw new NotFoundException('No coincidences');
+      return;
     }
 
     return food;

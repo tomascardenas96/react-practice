@@ -23,14 +23,27 @@ export class UserService {
     return this.userRepository.save(newUser);
   }
 
-  findByEmail(email: string) {
-    return this.userRepository.findOneBy({ email });
+  async findByEmail(email: string) {
+    const user = await this.userRepository.findOneBy({ email });
+    if (!user) {
+      throw new NotFoundException('User non-existent');
+    }
+
+    return user;
   }
 
   findByEmailWithPassword(email: string) {
     return this.userRepository.findOne({
       where: { email },
-      select: ['userId', 'email', 'username', 'password', 'role', 'permission', 'profilename'],
+      select: [
+        'userId',
+        'email',
+        'username',
+        'password',
+        'role',
+        'permission',
+        'profilename',
+      ],
     });
   }
 
@@ -40,8 +53,8 @@ export class UserService {
 
   async findByProfileName(profilename: string) {
     const foundUser = await this.userRepository.findOneBy({ profilename });
-    if(!foundUser) {
-      throw new NotFoundException('User not found by profile name')
+    if (!foundUser) {
+      throw new NotFoundException('User not found by profile name');
     }
     return foundUser;
   }
