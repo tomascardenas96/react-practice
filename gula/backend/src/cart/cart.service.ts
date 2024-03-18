@@ -1,16 +1,22 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateCartDto } from './dto/create-cart.dto';
 import { UpdateCartDto } from './dto/update-cart.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Cart } from './entities/cart.entity';
 import { Repository } from 'typeorm';
 import { UserService } from 'src/user/user.service';
+import { AddToCartDto } from './dto/add-to-cart.dto';
+import { ActiveUserInterface } from 'src/common/interfaces/active-user.interface';
+import { FoodOnCartService } from 'src/food_on_cart/food_on_cart.service';
+import { FoodService } from 'src/food/food.service';
 
 @Injectable()
 export class CartService {
   constructor(
     @InjectRepository(Cart) private readonly cartRepository: Repository<Cart>,
     private readonly userService: UserService,
+    private readonly foodOnCartService: FoodOnCartService,
+    private readonly foodService: FoodService,
   ) {}
 
   async create(createCartDto: CreateCartDto) {
@@ -30,12 +36,29 @@ export class CartService {
     return this.cartRepository.save(newCart);
   }
 
-  findAll() {
-    return `This action returns all cart`;
+  async addFoodOnCart(
+    addToCart: AddToCartDto,
+    activeUser: ActiveUserInterface,
+  ) {
+    const user = await this.userService.findByProfileName(
+      activeUser.profilename,
+    );
+    const cart = await this.cartRepository.findOne({ where: { user } });
+    const food = await this.foodService.findById(addToCart.food);
+    if (!food) {
+      throw new NotFoundException('Food not found');
+    }
+
+    return this.foodOnCartService.create(food, cart, addToCart.amount);
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} cart`;
+  async findAllByUser(activeUser: ActiveUserInterface) {
+    const user = await this.userService.findByProfileName(
+      activeUser.profilename,
+    );
+    const cart = await this.cartRepository.findOne({ where: { user } });
+
+    return this.foodOnCartService.findAllByUser(cart);
   }
 
   update(id: number, updateCartDto: UpdateCartDto) {

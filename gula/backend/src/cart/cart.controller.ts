@@ -11,24 +11,28 @@ import { CartService } from './cart.service';
 import { CreateCartDto } from './dto/create-cart.dto';
 import { UpdateCartDto } from './dto/update-cart.dto';
 import { User } from 'src/user/entities/user.entity';
+import { Auth } from 'src/common/decorators/auth.decorator';
+import { UserPermission } from 'src/common/enum/permission.enum';
+import { AddToCartDto } from './dto/add-to-cart.dto';
+import { ActiveUser } from 'src/common/decorators/active-user.decorator';
+import { ActiveUserInterface } from 'src/common/interfaces/active-user.interface';
 
+@Auth(UserPermission.USER)
 @Controller('cart')
 export class CartController {
   constructor(private readonly cartService: CartService) {}
 
-  @Post()
-  create(@Body() createCartDto: CreateCartDto) {
-    return this.cartService.create(createCartDto);
+  @Post('addtocart')
+  addFoodOnCart(
+    @Body() addToCart: AddToCartDto,
+    @ActiveUser() activeUser: ActiveUserInterface,
+  ) {
+    return this.cartService.addFoodOnCart(addToCart, activeUser);
   }
 
-  @Get()
-  findAll() {
-    return this.cartService.findAll();
-  }
-
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.cartService.findOne(+id);
+  @Get('cartbyuser')
+  findAllByUser(@ActiveUser() user: ActiveUserInterface) {
+    return this.cartService.findAllByUser(user);
   }
 
   @Patch(':id')

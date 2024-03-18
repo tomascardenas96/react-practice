@@ -1,5 +1,6 @@
 import { Cart } from 'src/cart/entities/cart.entity';
 import { Category } from 'src/category/entities/category.entity';
+import { FoodOnCart } from 'src/food_on_cart/entities/food_on_cart.entity';
 import { Shop } from 'src/shops/entities/shop.entity';
 import {
   Entity,
@@ -8,6 +9,7 @@ import {
   ManyToMany,
   ManyToOne,
   JoinColumn,
+  OneToMany,
 } from 'typeorm';
 
 @Entity()
@@ -36,6 +38,8 @@ export class Food {
   })
   shop: Shop;
 
-  @ManyToMany(() => Cart, (cart) => cart.food, { onDelete: 'CASCADE' })
-  cart: Cart[];
+  @OneToMany(() => FoodOnCart, (foodOnCart) => foodOnCart.food, {
+    onDelete: 'CASCADE',
+  })
+  food: FoodOnCart[];
 }

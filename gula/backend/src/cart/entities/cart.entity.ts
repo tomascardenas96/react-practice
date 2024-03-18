@@ -1,4 +1,5 @@
 import { Food } from 'src/food/entities/food.entity';
+import { FoodOnCart } from 'src/food_on_cart/entities/food_on_cart.entity';
 import { User } from 'src/user/entities/user.entity';
 import {
   Column,
@@ -6,6 +7,7 @@ import {
   JoinColumn,
   JoinTable,
   ManyToMany,
+  OneToMany,
   OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
@@ -18,22 +20,10 @@ export class Cart {
   @Column({ default: 0 })
   total: number;
 
-  @ManyToMany(() => Food, (food) => food.cart, {
+  @OneToMany(() => FoodOnCart, (foodOnCart) => foodOnCart.cart, {
     onDelete: 'CASCADE',
-    cascade: true,
   })
-  @JoinTable({
-    name: 'cart_food',
-    joinColumn: {
-      name: 'cart',
-      referencedColumnName: 'cartId',
-    },
-    inverseJoinColumn: {
-      name: 'food',
-      referencedColumnName: 'foodId',
-    },
-  })
-  food: Food[];
+  cart: FoodOnCart[];
 
   @OneToOne(() => User, (user) => user.cart, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'user' })
