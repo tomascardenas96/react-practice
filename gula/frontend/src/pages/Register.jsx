@@ -25,9 +25,6 @@ function Register() {
         setLoading(true);
         return response.json;
       })
-      .then((data) => {
-        console.log(data);
-      })
     } catch (error) {}
   };
 

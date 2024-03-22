@@ -2,6 +2,7 @@ import React from "react";
 import "./styles/HeaderFilter.css";
 import useFilter from "../hooks/useFilter";
 import { BsCartPlus } from "react-icons/bs";
+import useAddToCart from "../hooks/useAddToCart";
 
 function HeaderFilter() {
   const {
@@ -13,6 +14,8 @@ function HeaderFilter() {
     filterInput,
     handleChange,
   } = useFilter();
+
+  const { addToCart } = useAddToCart();
 
   return (
     <header className="header-filter__container">
@@ -32,14 +35,20 @@ function HeaderFilter() {
                   filteredFood.map((food, idx) => (
                     <ul key={idx} className="header-filter__results-list">
                       <li className="results-img">
-                        <img className="img" src="https://img.freepik.com/vector-gratis/deliciosa-comida-rapida-estilo-pop-art_24908-61615.jpg?size=338&ext=jpg&ga=GA1.1.117944100.1709856000&semt=ais" alt="imagen-de-prueba"  />
+                        <img
+                          className="img"
+                          src="https://img.freepik.com/vector-gratis/deliciosa-comida-rapida-estilo-pop-art_24908-61615.jpg?size=338&ext=jpg&ga=GA1.1.117944100.1709856000&semt=ais"
+                          alt="imagen-de-prueba"
+                        />
                       </li>
                       <li className="results-description">
                         {food.description}
                       </li>
                       <li className="results-price">${food?.price}</li>
                       <li className="results-shop">{food.shop?.name}</li>
-                      <li className="results-addtocart"><BsCartPlus /></li>
+                      <li className="results-addtocart">
+                        <BsCartPlus onClick={() => addToCart(food.foodId)} />
+                      </li>
                     </ul>
                   ))
                 ) : (

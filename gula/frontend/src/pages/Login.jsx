@@ -1,11 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Link, Navigate } from "react-router-dom";
 import "./Login.css";
-import useCart from "../hooks/useCart";
 
 function Login() {
   const token = localStorage.getItem("token");
-  const { handleCart, cartError } = useCart();
   const [user, setUser] = useState({
     email: "",
     password: "",
@@ -39,7 +37,6 @@ function Login() {
           localStorage.setItem("token", data.token);
           localStorage.setItem("refreshToken", data.refreshToken);
           localStorage.setItem("email", data.email);
-          handleCart(data.email);
         });
     } catch (error) {
       throw new Error(error);

@@ -1,36 +1,41 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 function useCart() {
   const token = localStorage.getItem("token");
-  //   const email = localStorage.getItem("email");
-  //   const [newCart, setNewCart] = useState({
-  //     user: email,
-  //   });
+  const email = localStorage.getItem("email");
   const [cartError, setCartError] = useState(null);
+  const [cartModal, setCartModal] = useState(false);
 
-  const handleCart = async (email) => {
-    try {
-      const response = await fetch("http://localhost:3070/api/v1/cart", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({
-          user: email,
-        }),
-      });
-      const parsedResponse = await response.json();
-      console.log(parsedResponse);
-      if (parsedResponse.error) {
-        throw new Error(parsedResponse.message);
+  useEffect(() => {
+    const handleCart = async () => {
+      try {
+        const response = await fetch("http://localhost:3070/api/v1/cart", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            user: email,
+          }),
+        });
+        const parsedResponse = await response.json();
+        if (parsedResponse.error) {
+          throw new Error(parsedResponse.message);
+        }
+      } catch (err) {
+        setCartError(err);
       }
-    } catch (err) {
-      setCartError(err);
-    }
+    };
+
+    handleCart();
+  }, [token, email]);
+
+  const handleOpenCloseCartModal = () => {
+    setCartModal(!cartModal);
   };
 
-  return { handleCart, cartError };
+  return { cartError, handleOpenCloseCartModal, cartModal };
 }
 
 export default useCart;

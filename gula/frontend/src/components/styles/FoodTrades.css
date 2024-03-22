@@ -3,16 +3,17 @@
     min-height: 20rem;
     justify-content: center;
     align-items: center;
+    user-select: none;
 }
 
 .food-trades {
     display: flex;
     flex-direction: column;
     min-height: 20rem;
-    width: 95rem;
+    width: 100rem;
     justify-content: start;
     align-items: center;
-    gap: 1.5rem;
+    gap: 2rem;
     padding: 1rem;
 }
 
@@ -27,7 +28,6 @@
     display: grid;
     align-items: center;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-    /* grid-template-rows: 1fr; */
     justify-content: space-between;
-    padding: 0 1rem;
+    padding: 0 0rem;
 }

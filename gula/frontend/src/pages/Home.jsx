@@ -9,10 +9,13 @@ import Footer from "../components/Footer";
 import NewPost from "../components/NewPost";
 import HomePagePosts from "../components/HomePagePosts";
 import useFilter from "../hooks/useFilter";
+import useCart from "../hooks/useCart";
+import Cart from "../components/Cart";
 
 function Home() {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
+  const { cartError } = useCart();
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -63,6 +66,7 @@ function Home() {
         <Header />
         <HeaderFilter />
         <Categories />
+        <Cart />
         <FoodTrades />
         <HomePagePosts />
         <Footer />
