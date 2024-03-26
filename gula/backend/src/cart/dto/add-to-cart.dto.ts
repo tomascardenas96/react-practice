@@ -4,8 +4,5 @@ export class AddToCartDto {
   @IsNumber()
   @IsNotEmpty()
   food: number;
-  
-  @IsNumber()
-  @IsNotEmpty()
-  amount: number;
+
 }

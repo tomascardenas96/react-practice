@@ -21,6 +21,7 @@ export class CartService {
 
   async create(createCartDto: CreateCartDto) {
     const user = await this.userService.findByEmail(createCartDto.user);
+
     const verifyExistenceOfCart = await this.cartRepository.findOne({
       where: { user },
     });
@@ -49,7 +50,19 @@ export class CartService {
       throw new NotFoundException('Food not found');
     }
 
-    return this.foodOnCartService.create(food, cart, addToCart.amount);
+    const existentFoodOnCart = await this.foodOnCartService.findByFoodAndCart(
+      food,
+      cart,
+    );
+    if (existentFoodOnCart) {
+      existentFoodOnCart.amount += 1;
+      return this.foodOnCartService.update(
+        existentFoodOnCart.foodOnCartId,
+        existentFoodOnCart,
+      );
+    }
+
+    return this.foodOnCartService.create(food, cart);
   }
 
   async findAllByUser(activeUser: ActiveUserInterface) {
@@ -59,6 +72,13 @@ export class CartService {
     const cart = await this.cartRepository.findOne({ where: { user } });
 
     return this.foodOnCartService.findAllByUser(cart);
+  }
+
+  async findCartByUser(activeUser: ActiveUserInterface) {
+    const user = await this.userService.findByProfileName(
+      activeUser.profilename,
+    );
+    return this.cartRepository.findOneBy({ user });
   }
 
   update(id: number, updateCartDto: UpdateCartDto) {

@@ -1,5 +1,6 @@
 import { Food } from 'src/food/entities/food.entity';
 import { FoodOnCart } from 'src/food_on_cart/entities/food_on_cart.entity';
+import { Invoice } from 'src/invoice/entities/invoice.entity';
 import { User } from 'src/user/entities/user.entity';
 import {
   Column,
@@ -17,9 +18,6 @@ export class Cart {
   @PrimaryGeneratedColumn()
   cartId: number;
 
-  @Column({ default: 0 })
-  total: number;
-
   @OneToMany(() => FoodOnCart, (foodOnCart) => foodOnCart.cart, {
     onDelete: 'CASCADE',
   })
@@ -28,4 +26,7 @@ export class Cart {
   @OneToOne(() => User, (user) => user.cart, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'user' })
   user: User;
+
+  @OneToMany(() => Invoice, (invoice) => invoice.cart, { onDelete: 'CASCADE' })
+  invoice: Invoice;
 }

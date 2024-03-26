@@ -1,6 +1,15 @@
 import { Cart } from 'src/cart/entities/cart.entity';
 import { Food } from 'src/food/entities/food.entity';
-import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Invoice } from 'src/invoice/entities/invoice.entity';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  OneToMany,
+  OneToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
 @Entity()
 export class FoodOnCart {
@@ -9,13 +18,13 @@ export class FoodOnCart {
 
   @ManyToOne(() => Cart, (cart) => cart.cart, { onDelete: 'CASCADE' })
   @JoinColumn({
-    name: 'cart'
+    name: 'cart',
   })
   cart: Cart;
 
   @ManyToOne(() => Food, (food) => food.food, { onDelete: 'CASCADE' })
   @JoinColumn({
-    name: 'food'
+    name: 'food',
   })
   food: Food;
 

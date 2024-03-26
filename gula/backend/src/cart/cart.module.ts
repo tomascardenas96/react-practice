@@ -16,5 +16,6 @@ import { FoodOnCartModule } from 'src/food_on_cart/food_on_cart.module';
   ],
   controllers: [CartController],
   providers: [CartService],
+  exports: [CartService]
 })
 export class CartModule {}

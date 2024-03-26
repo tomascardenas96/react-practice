@@ -42,6 +42,7 @@ export class AuthService {
 
   async login({ email, password }: LoginDto) {
     const user = await this.userService.findByEmailWithPassword(email);
+    console.log(user);
     if (!user) {
       throw new UnauthorizedException('E-mail wrong or inexistent ');
     }
@@ -50,6 +51,7 @@ export class AuthService {
       throw new UnauthorizedException('Incorrect password');
     }
 
+    //Estos son los datos que van a ir encriptados dentro del token.
     const payload = {
       userId: user.userId,
       profilename: user.profilename,
@@ -78,6 +80,7 @@ export class AuthService {
     };
   }
 
+  //Este no lo vamos a implementar.
   async refreshToken(refreshToken: string) {
     try {
       const decodedToken = await this.jwtService.decode(refreshToken);

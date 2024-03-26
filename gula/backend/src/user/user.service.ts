@@ -11,6 +11,7 @@ export class UserService {
     private readonly userRepository: Repository<User>,
   ) {}
 
+  //Este metodo posiblemente no se utilice
   findAll() {
     return this.userRepository.find();
   }
@@ -25,13 +26,10 @@ export class UserService {
 
   async findByEmail(email: string) {
     const user = await this.userRepository.findOneBy({ email });
-    if (!user) {
-      throw new NotFoundException('User non-existent');
-    }
-
     return user;
   }
 
+  //Metodo utilizado para el login (dentro de auth service), es igual al metodo findByEmail a diferencia que este metodo muestra la contraseña (aunque este hasheada, se necesita para hacer la comparacion en el mismo metodo de login)
   findByEmailWithPassword(email: string) {
     return this.userRepository.findOne({
       where: { email },

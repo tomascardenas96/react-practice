@@ -6,34 +6,25 @@ import {
   Patch,
   Param,
   Delete,
+  ParseIntPipe,
 } from '@nestjs/common';
 import { FoodOnCartService } from './food_on_cart.service';
-import { UpdateFoodOnCartDto } from './dto/update-food_on_cart.dto';
+import AddOrSubstractDto from './dto/add-or-substract.dto';
 
 @Controller('food-on-cart')
 export class FoodOnCartController {
   constructor(private readonly foodOnCartService: FoodOnCartService) {}
 
-  // @Get()
-  // findAllByUser() {
-  //   return this.foodOnCartService.findAllByUser();
-  // }
-
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.foodOnCartService.findOne(+id);
-  }
-
-  @Patch(':id')
-  update(
-    @Param('id') id: string,
-    @Body() updateFoodOnCartDto: UpdateFoodOnCartDto,
+  @Patch('/modifyamount/:id')
+  addOrSubstractAmount(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() addOrSubstractDto: AddOrSubstractDto,
   ) {
-    return this.foodOnCartService.update(+id, updateFoodOnCartDto);
+    return this.foodOnCartService.addOrSubstractAmount(id, addOrSubstractDto);
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.foodOnCartService.remove(+id);
+  @Delete('/delete/:id')
+  remove(@Param('id', ParseIntPipe) id: number) {
+    return this.foodOnCartService.remove(id);
   }
 }

@@ -9,6 +9,7 @@ import { SocketsModule } from './sockets/sockets.module';
 import { ShopsModule } from './shops/shops.module';
 import { CartModule } from './cart/cart.module';
 import { FoodOnCartModule } from './food_on_cart/food_on_cart.module';
+import { InvoiceModule } from './invoice/invoice.module';
 @Module({
   imports: [
     UserModule,
@@ -30,6 +31,7 @@ import { FoodOnCartModule } from './food_on_cart/food_on_cart.module';
     ShopsModule,
     CartModule,
     FoodOnCartModule,
+    InvoiceModule,
   ],
   controllers: [],
   providers: [],

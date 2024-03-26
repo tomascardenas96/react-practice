@@ -7,7 +7,7 @@ import { CreateShopDto } from './dto/create-shop.dto';
 import { UpdateShopDto } from './dto/update-shop.dto';
 import { Shop } from './entities/shop.entity';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { ILike, Repository } from 'typeorm';
 import { ActiveUserInterface } from 'src/common/interfaces/active-user.interface';
 import { UserService } from 'src/user/user.service';
 
@@ -60,13 +60,19 @@ export class ShopsService {
   async getShopByProfileName(profileName: string) {
     const foundShop = await this.shopRepository.findOne({
       where: { profileName },
-      relations: ['user']
+      relations: ['user'],
     });
     if (!foundShop) {
       throw new NotFoundException('Shop not found');
     }
 
     return foundShop;
+  }
+
+  async searchShopByFilter(search: string) {
+    return this.shopRepository.find({where: {
+      name: ILike(`%${search}%`)
+    }});
   }
 
   update(id: number, updateShopDto: UpdateShopDto) {

@@ -23,6 +23,7 @@ export class User {
   @Column({ unique: true, nullable: false })
   email: string;
 
+  //Select false es para que no se muestre la contraseña en el retorno.
   @Column({ nullable: false, select: false })
   password: string;
 

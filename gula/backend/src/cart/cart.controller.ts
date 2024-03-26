@@ -22,6 +22,11 @@ import { ActiveUserInterface } from 'src/common/interfaces/active-user.interface
 export class CartController {
   constructor(private readonly cartService: CartService) {}
 
+  @Post()
+  create(@Body() createCartDto: CreateCartDto) {
+    return this.cartService.create(createCartDto);
+  }
+
   @Post('addtocart')
   addFoodOnCart(
     @Body() addToCart: AddToCartDto,

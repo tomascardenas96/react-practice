@@ -13,4 +13,12 @@ export class SocketsService {
   async emitNewPostFood(payload: any) {
     this.socketsGateway.handleNewPostFood(payload);
   }
+
+  async emitNewAmountValue(payload: any) {
+    this.socketsGateway.handleModifyFoodAmountOnCart(payload);
+  }
+
+  async emitAddFoodToCart(payload: any) {
+    this.socketsGateway.handleAddFoodToCart(payload);
+  }
 }

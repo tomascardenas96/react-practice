@@ -66,7 +66,10 @@ export class FoodService {
   }
 
   async findById(foodId: number) {
-    return this.foodRepository.findOne({ where: { foodId } });
+    return this.foodRepository.findOne({
+      where: { foodId },
+      relations: ['shop'],
+    });
   }
 
   update(id: number, updateFoodDto: UpdateFoodDto) {

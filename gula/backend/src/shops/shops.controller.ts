@@ -6,6 +6,7 @@ import {
   Patch,
   Param,
   Delete,
+  Query,
 } from '@nestjs/common';
 import { ShopsService } from './shops.service';
 import { CreateShopDto } from './dto/create-shop.dto';
@@ -36,6 +37,11 @@ export class ShopsController {
   @Get('/user')
   getAllByUser(@ActiveUser() user: ActiveUserInterface) {
     return this.shopsService.getAllByUser(user);
+  }
+
+  @Get('filter')
+  searchShopByFilter(@Query('search') search: string) {
+    return this.shopsService.searchShopByFilter(search);
   }
 
   @Patch(':id')
