@@ -64,4 +64,8 @@ export class FoodOnCartService {
   remove(id: number) {
     return this.foodOnCartRepository.delete({ foodOnCartId: id });
   }
+
+  removeAllOnCart(foodOnCart: FoodOnCart) {
+    return this.foodOnCartRepository.delete(foodOnCart)
+  }
 }

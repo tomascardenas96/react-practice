@@ -38,11 +38,13 @@ export class InvoiceService {
         foodShop: foodOnCart.food.shop,
       });
       await this.invoiceRepository.save(newInvoice);
+      //Para borrar cada producto del carrito a medida que se va agregando a la factura.
+      await this.foodOnCartService.removeAllOnCart(foodOnCart);
     }
 
     return {
-      message: 'Invoice generated succesfully'
-    }
+      message: 'Invoice generated succesfully',
+    };
   }
 
   findAll() {

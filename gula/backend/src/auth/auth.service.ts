@@ -42,7 +42,6 @@ export class AuthService {
 
   async login({ email, password }: LoginDto) {
     const user = await this.userService.findByEmailWithPassword(email);
-    console.log(user);
     if (!user) {
       throw new UnauthorizedException('E-mail wrong or inexistent ');
     }
