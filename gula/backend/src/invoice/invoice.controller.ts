@@ -23,26 +23,24 @@ export class InvoiceController {
   constructor(private readonly invoiceService: InvoiceService) {}
 
   @Post()
-  create(
-    @ActiveUser() activeUser: ActiveUserInterface
-  ) {
+  create(@ActiveUser() activeUser: ActiveUserInterface) {
     return this.invoiceService.generateInvoice(activeUser);
   }
 
   @Get()
-  findAll() {
-    return this.invoiceService.findAll();
+  getAllInvoicesByUser(@ActiveUser() activeUser: ActiveUserInterface) {
+    return this.invoiceService.getAllInvoicesByUser(activeUser);
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.invoiceService.findOne(+id);
-  }
+  // @Get(':id')
+  // findOne(@Param('id') id: string) {
+  //   return this.invoiceService.findOne(+id);
+  // }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateInvoiceDto: UpdateInvoiceDto) {
-    return this.invoiceService.update(+id, updateInvoiceDto);
-  }
+  // @Patch(':id')
+  // update(@Param('id') id: string, @Body() updateInvoiceDto: UpdateInvoiceDto) {
+  //   return this.invoiceService.update(+id, updateInvoiceDto);
+  // }
 
   @Delete(':id')
   remove(@Param('id') id: string) {

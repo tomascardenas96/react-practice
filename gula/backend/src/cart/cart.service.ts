@@ -71,7 +71,7 @@ export class CartService {
     );
     const cart = await this.cartRepository.findOne({ where: { user } });
 
-    return this.foodOnCartService.findAllByUser(cart);
+    return await this.foodOnCartService.findAllByUser(cart);
   }
 
   async findCartByUser(activeUser: ActiveUserInterface) {

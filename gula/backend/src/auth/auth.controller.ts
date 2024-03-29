@@ -14,7 +14,7 @@ export class AuthController {
   constructor(
     private readonly authService: AuthService,
     private readonly userService: UserService,
-    private readonly shopService: ShopsService
+    private readonly shopService: ShopsService,
   ) {}
 
   @Post('/register')
@@ -27,12 +27,7 @@ export class AuthController {
     return this.authService.login(user);
   }
 
-  // @Post('/refresh-token')
-  // async refresh(@Body('refreshToken') refreshToken: string) {
-  //   const newAccessToken = await this.authService.refreshToken(refreshToken);
-  //   return { token: newAccessToken };
-  // }
-
+  //<----Para acceder a las secciones protegidas, unicamente se le garantizara acceso al usuario si tiene un token valido. ---->
   @Get('/home')
   @Auth(UserPermission.USER)
   home(@ActiveUser() user: ActiveUserInterface) {
@@ -46,7 +41,7 @@ export class AuthController {
   }
 
   @Get('/commerce/:commerce')
-  @Auth(UserPermission.USER) 
+  @Auth(UserPermission.USER)
   shopProfile(@Param('commerce') commerce: string) {
     return this.shopService.getShopByProfileName(commerce);
   }

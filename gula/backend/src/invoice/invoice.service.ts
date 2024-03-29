@@ -21,6 +21,7 @@ export class InvoiceService {
 
   async generateInvoice(activeUser: ActiveUserInterface) {
     const activeCart: Cart = await this.cartService.findCartByUser(activeUser);
+    const invoiceNumber = await this.generateInvoiceNumber();
     const foodsOnCart: FoodOnCart[] =
       await this.foodOnCartService.findAllByUser(activeCart);
 
@@ -31,6 +32,7 @@ export class InvoiceService {
     //Agregar logica para numero de factura.
     for (const foodOnCart of foodsOnCart) {
       const newInvoice = this.invoiceRepository.create({
+        invoiceNumber: invoiceNumber,
         foodDescription: foodOnCart.food.description,
         foodAmount: foodOnCart.amount,
         foodUnitaryPrice: foodOnCart.food.price,
@@ -47,16 +49,42 @@ export class InvoiceService {
     };
   }
 
-  findAll() {
-    return `This action returns all invoice`;
+  //Este metodo genera un numero de factura correlativo.
+  async generateInvoiceNumber() {
+    const allInvoices = await this.getAll();
+    let highestInvoiceNumber: number;
+
+    // Si no hay facturas en la base de datos, comenzamos desde 1
+    if (!allInvoices || allInvoices.length === 0) {
+      highestInvoiceNumber = 0;
+    } else {
+      // Encontrar el número de factura más alto
+      highestInvoiceNumber = Math.max(
+        ...allInvoices.map((invoice) => {
+          const invoiceNumber = parseInt(invoice.invoiceNumber.split(' ')[1]);
+          return invoiceNumber;
+        }),
+      );
+    }
+
+    // Incrementar el número de factura más alto en 1
+    const nextInvoiceNumber = highestInvoiceNumber + 1;
+
+    // Formatear el número de factura con ceros a la izquierda
+    const formattedInvoiceNumber = `C001 ${nextInvoiceNumber
+      .toString()
+      .padStart(8, '0')}`;
+
+    return formattedInvoiceNumber;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} invoice`;
+  getAll() {
+    return this.invoiceRepository.find();
   }
 
-  update(id: number, updateInvoiceDto: UpdateInvoiceDto) {
-    return `This action updates a #${id} invoice`;
+  async getAllInvoicesByUser(activeUser: ActiveUserInterface) {
+    const activeCart: Cart = await this.cartService.findCartByUser(activeUser);
+    return this.invoiceRepository.find({ where: { cart: activeCart }});
   }
 
   remove(id: number) {

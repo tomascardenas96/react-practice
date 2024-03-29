@@ -13,6 +13,7 @@ import { CreateFoodDto } from './dto/create-food.dto';
 import { UpdateFoodDto } from './dto/update-food.dto';
 import { Auth } from 'src/common/decorators/auth.decorator';
 import { UserPermission } from 'src/common/enum/permission.enum';
+import { Category } from 'src/category/entities/category.entity';
 
 @Auth(UserPermission.USER)
 @Controller('food')
@@ -32,6 +33,11 @@ export class FoodController {
   @Get('/shop/:shopName')
   findByShop(@Param('shopName') shopName: string) {
     return this.foodService.findByShop(shopName);
+  }
+
+  @Get('/filter/category/:category')
+  findByCategory(@Param('category') category: string) {
+    return this.foodService.findByCategory(category)
   }
 
   @Patch(':id')

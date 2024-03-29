@@ -6,6 +6,7 @@ import { Food } from './entities/food.entity';
 import { ILike, Repository } from 'typeorm';
 import { ShopsService } from 'src/shops/shops.service';
 import { CategoryService } from 'src/category/category.service';
+import { Category } from 'src/category/entities/category.entity';
 
 @Injectable()
 export class FoodService {
@@ -70,6 +71,13 @@ export class FoodService {
       where: { foodId },
       relations: ['shop'],
     });
+  }
+
+  //Para filtrar la comida por categoria.
+  async findByCategory(category: string) {
+    const foundCategory =
+      await this.categoryService.getCategoryByName(category);
+    return this.foodRepository.find({ where: { category: foundCategory } });
   }
 
   update(id: number, updateFoodDto: UpdateFoodDto) {

@@ -10,6 +10,8 @@ import { ShopsModule } from './shops/shops.module';
 import { CartModule } from './cart/cart.module';
 import { FoodOnCartModule } from './food_on_cart/food_on_cart.module';
 import { InvoiceModule } from './invoice/invoice.module';
+import { FileModule } from './file/file.module';
+
 @Module({
   imports: [
     UserModule,
@@ -32,6 +34,7 @@ import { InvoiceModule } from './invoice/invoice.module';
     CartModule,
     FoodOnCartModule,
     InvoiceModule,
+    FileModule
   ],
   controllers: [],
   providers: [],

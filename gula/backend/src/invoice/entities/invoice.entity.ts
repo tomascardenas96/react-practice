@@ -16,6 +16,9 @@ export class Invoice {
   @PrimaryGeneratedColumn()
   invoiceId: number;
 
+  @Column({ nullable: false })
+  invoiceNumber: string;
+
   @Column()
   foodDescription: string;
 
