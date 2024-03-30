@@ -33,7 +33,7 @@ function DropdownMenu() {
         </li>
         {shops.map((shop) => (
           <li className="shop-item" key={shop.shopId}>
-            <span className="shop-item__icon"></span>
+            <span className="shop-item__icon"><img src="https://img.freepik.com/vector-gratis/deliciosa-comida-rapida-estilo-pop-art_24908-61615.jpg?size=338&ext=jpg&ga=GA1.1.117944100.1709856000&semt=ais" alt="" /></span>
             <Link to={`/commerce/${shop.profileName}`}>{shop.name}</Link>
           </li>
         ))}

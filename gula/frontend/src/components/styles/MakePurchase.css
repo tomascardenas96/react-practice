@@ -1,0 +1,16 @@
+.make-purchase__container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.make-purchase__container div {
+  /* background-color: green; */
+  display: flex;
+  justify-content: space-between;
+}
+
+.make-purchase__total-price {
+  font-weight: bold;
+  font-size: 1.2rem;
+}

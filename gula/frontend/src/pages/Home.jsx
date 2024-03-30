@@ -11,6 +11,7 @@ import HomePagePosts from "../components/HomePagePosts";
 import useFilter from "../hooks/useFilter";
 import useCart from "../hooks/useCart";
 import Cart from "../components/Cart";
+import UploadProfilePicture from "../components/UploadProfilePicture";
 
 function Home() {
   const [error, setError] = useState(null);

@@ -10,7 +10,7 @@ const HomePagePosts = () => {
 
   useEffect(() => {
     fetchPosts();
-    const socket = io("http://localhost:8001");
+    const socket = io("http://localhost:8005");
 
     socket.on("nuevaPublicacion", (nuevaPublicacion) => {
       setPosts((prevPosts) => [...prevPosts, nuevaPublicacion]);

@@ -52,7 +52,7 @@
   border-radius: 0.2rem;
   box-shadow: 0px 0px 4px 0.2px rgba(0, 0, 0, 0.418);
   padding: 0.8rem;
-  animation: slideInOut .5s ease;
+  animation: slideInOut 0.5s ease;
   overflow: scroll;
 }
 
@@ -60,7 +60,7 @@
   0% {
     max-height: 0;
   }
-    100% {
+  100% {
     max-height: 30rem;
   }
 }
@@ -73,22 +73,49 @@
 
 .cart-modal__item {
   display: grid;
-  grid-template-columns: 10fr 3fr 1fr;
+  grid-template-columns: 10fr 3fr 3fr 1fr;
   border-bottom: 1px solid rgba(0, 0, 0, 0.214);
   padding-bottom: 1.2rem;
+  align-items: center;
+}
+
+.cart-modal__item .cart-modal__item__total-price {
+  font-size: 1rem;
+  display: grid;
 }
 
 .cart-modal__item li {
-  /* background-color: red; */
   font-size: 1.1rem;
+  display: grid;
+}
+
+
+.cart-modal__item li > p {
+  display: flex;
+  align-items: center;
 }
 
 .cart-modal__item-amount {
-    display: flex;
-    gap: .8rem;
+  display: flex;
+  gap: 0.6rem;
 }
 
 .cart-modal__item-amount p {
-    color: rgba(255, 0, 0, 0.619);
-    cursor: pointer;
+  color: rgba(255, 0, 0, 0.619);
+  cursor: pointer;
+  display: grid;
+  align-items: center;
+  font-size: 1.2rem;
+  font-weight: bolder;
+}
+
+.cart-modal__item-delete {
+  display: grid;
+  place-content: center;
+  cursor: pointer;
+}
+
+.cart-modal__item-delete-icon {
+  font-size: 0.9rem;
+  color: rgba(0, 0, 0, 0.529);
 }

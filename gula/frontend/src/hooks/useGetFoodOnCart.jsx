@@ -4,10 +4,11 @@ import { io } from "socket.io-client";
 function useGetFoodOnCart() {
   const [foodOnCart, setFoodOnCart] = useState([]);
   const [amount, setAmount] = useState(0);
+  const [totalPrice, setTotalPrice] = useState(0);
   const token = localStorage.getItem("token");
 
   useEffect(() => {
-    const socket = io("http://localhost:8001");
+    const socket = io("http://localhost:8005");
 
     socket.on("addFoodToCart", (newFoodOnCart) => {
       setFoodOnCart((prevFoodOnCart) => [...prevFoodOnCart, newFoodOnCart]);
@@ -16,7 +17,7 @@ function useGetFoodOnCart() {
     return () => {
       socket.disconnect();
     };
-  }, [setFoodOnCart]);
+  }, [token, setFoodOnCart]);
 
   useEffect(() => {
     getFoodOnCart();
@@ -40,6 +41,7 @@ function useGetFoodOnCart() {
       );
       const parsedResponse = await response.json();
       if (parsedResponse.error) {
+        throw new Error();
       }
       setFoodOnCart(parsedResponse);
     } catch (err) {}
@@ -52,9 +54,24 @@ function useGetFoodOnCart() {
       }, 0);
       setAmount(totalAmount);
     }
+    if (!foodOnCart.length) {
+      setAmount(0);
+    }
   };
 
-  return { foodOnCart, amount };
+  useEffect(() => {
+    const getTotalPrice = () => {
+      const total = foodOnCart.reduce(
+        (acc, order) => acc + order.food.price * order.amount,
+        0
+      );
+      setTotalPrice(total);
+    };
+
+    getTotalPrice();
+  }, [foodOnCart]);
+
+  return { foodOnCart, amount, totalPrice };
 }
 
 export default useGetFoodOnCart;

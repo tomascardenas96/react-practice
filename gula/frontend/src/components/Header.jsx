@@ -4,6 +4,7 @@ import { CiSearch } from "react-icons/ci";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import DropdownMenu from "./DropdownMenu";
 import useFilterShops from "../hooks/useFilterShops";
+import useGetProfilePicture from "../hooks/useGetProfilePicture";
 
 function Header() {
   const username = localStorage.getItem("username");
@@ -11,7 +12,7 @@ function Header() {
     useFilterShops();
   const [userModal, setUserModal] = useState(false);
   const [searchModal, setSearchModal] = useState(false);
-
+  const { userImageURL } = useGetProfilePicture();
   const handleModal = () => {
     setUserModal(!userModal);
   };
@@ -52,7 +53,7 @@ function Header() {
             <MdKeyboardArrowDown className="menu-arrow" /> {username}
           </p>
           <img
-            src="https://imgv3.fotor.com/images/gallery/Realistic-Male-Profile-Picture.jpg"
+            src={userImageURL} //De esta manera sigue sin mostrarme la foto en el frontend.
             alt="gula-profile-pic"
           />
         </div>

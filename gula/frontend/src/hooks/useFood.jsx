@@ -21,7 +21,15 @@ function useFood() {
   useEffect(() => {
     if (shop.profileName) {
       getFood();
-      const socket = io("http://localhost:8001");
+      const socket = io("http://localhost:8005");
+
+      socket.on("disconnect", () => {
+        console.log("Disconnected from server");
+        setTimeout(() => {
+          console.log("Attempting to reconnect...");
+          socket.connect();
+        }, 5000);
+      });
 
       socket.on("newFood", (food) => {
         setMenu((prevMenu) => [...prevMenu, food]);

@@ -65,14 +65,15 @@
   gap: 0.6rem;
   font-size: 0.9rem;
   color: rgba(0, 0, 0, 0.619);
-  /* background-color: green; */
   align-items: center;
 
 }
 
 .shop-item__icon {
-  border: 1px solid black;
   width: 2.3rem;
   height: 2.3rem;
-  border-radius: 50%;
+}
+
+.shop-item__icon img {
+  width: 100%;
 }

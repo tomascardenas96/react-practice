@@ -1,0 +1,28 @@
+.upload-photo__modal-container {
+  width: 100vw;
+  height: 100svh;
+  background-color: rgba(255, 255, 255, 0.471);
+  position: fixed;
+  z-index: 1200;
+  display: grid;
+  place-content: center;
+}
+
+.upload-photo__modal {
+  width: 50rem;
+  height: 20rem;
+  background-color: white;
+  box-shadow: 1px 1px 4px 0.2px rgba(0, 0, 0, 0.418);
+  border-radius: 0.3rem;
+  position: relative;
+  display: grid;
+  place-content: center;
+}
+
+.upload-photo__modal-close {
+    position: absolute;
+    right: .8rem;
+    top: .6rem; 
+    font-size: 1.2rem; 
+    cursor: pointer;
+}
