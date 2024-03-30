@@ -1,8 +1,13 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  Injectable,
+  NotFoundException,
+  BadRequestException,
+} from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from './entities/user.entity';
+import { ActiveUserInterface } from 'src/common/interfaces/active-user.interface';
 
 @Injectable()
 export class UserService {
@@ -55,5 +60,31 @@ export class UserService {
       throw new NotFoundException('User not found by profile name');
     }
     return foundUser;
+  }
+
+  async uploadFile(file: Express.Multer.File, activeUser: ActiveUserInterface) {
+    if (!file) {
+      throw new BadRequestException('No file uploaded');
+    }
+    const user = await this.userRepository.findOne({
+      where: { profilename: activeUser.profilename },
+    });
+    if (!user) {
+      throw new NotFoundException('User not found');
+    }
+
+    user.profilePhoto = file.filename;
+
+    await this.userRepository.save(user);
+
+    return file;
+  }
+
+  async findActiveUser(activeUser: ActiveUserInterface) {
+    const user = await this.userRepository.findOne({
+      where: { profilename: activeUser.profilename },
+    });
+
+    return user;
   }
 }

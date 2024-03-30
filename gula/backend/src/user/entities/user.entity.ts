@@ -30,6 +30,9 @@ export class User {
   @Column({ nullable: false })
   profilename: string;
 
+  @Column({ default: 'c0749b7cc401421662ae901ec8f9f660.jpg' })
+  profilePhoto: string;
+
   @Column({
     type: 'enum',
     default: UserRole.CUSTOMER,

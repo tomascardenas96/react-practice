@@ -6,14 +6,12 @@ import {
   Patch,
   Param,
   Delete,
-  ParseIntPipe
 } from '@nestjs/common';
 import { FoodService } from './food.service';
 import { CreateFoodDto } from './dto/create-food.dto';
 import { UpdateFoodDto } from './dto/update-food.dto';
 import { Auth } from 'src/common/decorators/auth.decorator';
 import { UserPermission } from 'src/common/enum/permission.enum';
-import { Category } from 'src/category/entities/category.entity';
 
 @Auth(UserPermission.USER)
 @Controller('food')

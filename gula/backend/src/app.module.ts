@@ -10,7 +10,8 @@ import { ShopsModule } from './shops/shops.module';
 import { CartModule } from './cart/cart.module';
 import { FoodOnCartModule } from './food_on_cart/food_on_cart.module';
 import { InvoiceModule } from './invoice/invoice.module';
-import { FileModule } from './file/file.module';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
 
 @Module({
   imports: [
@@ -34,7 +35,11 @@ import { FileModule } from './file/file.module';
     CartModule,
     FoodOnCartModule,
     InvoiceModule,
-    FileModule
+    //Para poder acceder a una ruta estatica, como es este caso la carpeta uploads donde se guardan las fotos que suben los usuarios.
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', 'uploads'),
+      serveRoot: '/uploads',
+    }),
   ],
   controllers: [],
   providers: [],

@@ -1,8 +1,9 @@
-import 'reflect-metadata';
+// import 'reflect-metadata'; ----> Lo comente porque no recuerdo para que era, pero si surge algun error seguramente se solucione con esto.
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { config } from 'dotenv';
 import { ValidationPipe } from '@nestjs/common';
+import * as bodyParser from 'body-parser';
 config();
 
 async function bootstrap() {
@@ -16,6 +17,10 @@ async function bootstrap() {
       transform: true,
     }),
   );
+
+  //Para modificar el limite permitido de carga de archivos por parte del usuario.
+  app.use(bodyParser.json({ limit: '10000mb' }));
+  app.use(bodyParser.urlencoded({ limit: '10000mb', extended: true }));
   await app.listen(3070);
 }
 bootstrap();
