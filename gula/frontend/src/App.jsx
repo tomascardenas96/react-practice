@@ -5,6 +5,7 @@ import Profile from "./pages/Profile";
 import Protected from "./components/Protected";
 import Register from "./pages/Register";
 import Shop from "./pages/Shop";
+import Category from "./pages/Category";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
               <Route exact path="/home" element={<Home />} />
               <Route exact path='/profile/:profilename' element={<Profile />} />
               <Route exact path='/commerce/:commerce' element={<Shop />} />
+              <Route exact path='/category/:category' element={<Category />} />
               {/* <Route exact path='/filter/:' element={<Shop />} /> */}
               <Route exact path="/*" element={<h1>Pagina no encontrada</h1>} />
             </Route>

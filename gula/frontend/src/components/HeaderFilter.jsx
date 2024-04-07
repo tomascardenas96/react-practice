@@ -37,7 +37,7 @@ function HeaderFilter() {
                       <li className="results-img">
                         <img
                           className="img"
-                          src="https://img.freepik.com/vector-gratis/deliciosa-comida-rapida-estilo-pop-art_24908-61615.jpg?size=338&ext=jpg&ga=GA1.1.117944100.1709856000&semt=ais"
+                          src={food.image}
                           alt="imagen-de-prueba"
                         />
                       </li>

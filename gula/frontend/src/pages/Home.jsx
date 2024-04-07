@@ -37,7 +37,7 @@ function Home() {
         })
         .then((data) => {
           localStorage.setItem("username", data.username);
-          localStorage.setItem("profilename", data.profilename);
+          // localStorage.setItem("profilename", data.profilename);
           localStorage.setItem("permission", data.permission);
         });
     } catch (error) {
@@ -70,7 +70,7 @@ function Home() {
         <Cart />
         <FoodTrades />
         <HomePagePosts />
-        <Footer />
+        <Footer />  
       </main>
     </>
   );

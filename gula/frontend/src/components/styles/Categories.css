@@ -4,7 +4,12 @@
   align-items: center;
   width: 100%;
   margin-top: 1.2rem;
-  user-select: none;
+  user-select: none;  
+}
+
+.categories-food__container a {
+  text-decoration: none;
+  color: inherit;
 }
 
 .categories-food__container section {

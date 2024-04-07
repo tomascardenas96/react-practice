@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import CategoryCard from "./CategoryCard";
 import Spinner from "./Spinner";
 import "./styles/Categories.css";
@@ -112,12 +113,13 @@ function Categories() {
         <h1>Categorias</h1>
         <div>
           {categories.map((categ, index) => (
-            <CategoryCard
-              className="unit-category"
-              key={index}
-              icon={categoryIcons[index]}
-              categoryName={categ.description}
-            />
+            <Link key={index} to={`/category/${(categ.description).toLowerCase()}`}>
+              <CategoryCard
+                className="unit-category"
+                icon={categoryIcons[index]}
+                categoryName={categ.description}
+              />
+            </Link>
           ))}
         </div>
       </section>

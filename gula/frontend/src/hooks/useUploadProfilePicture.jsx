@@ -16,7 +16,7 @@ function useUploadProfilePicture() {
 
     try {
       const response = await fetch(
-        "http://localhost:3070/api/v1/user/upload-profile-picture",
+        "http://localhost:3070/api/v1/profile/upload-profile-picture",
         {
           method: "POST",
           headers: {

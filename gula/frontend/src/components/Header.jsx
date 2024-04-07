@@ -53,7 +53,7 @@ function Header() {
             <MdKeyboardArrowDown className="menu-arrow" /> {username}
           </p>
           <img
-            src={userImageURL} //De esta manera sigue sin mostrarme la foto en el frontend.
+            src={userImageURL}
             alt="gula-profile-pic"
           />
         </div>

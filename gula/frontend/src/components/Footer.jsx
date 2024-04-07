@@ -14,11 +14,6 @@ function Footer() {
             alt="logo-gula-white"
           />
           <div>
-            {/* <div className="social-network">
-              <FaTwitter className="footer__social-network" />
-              <AiFillInstagram className="footer__social-network" />
-              <FaFacebook className="footer__social-network" />
-            </div> */}
             <p>All rights reserved ©</p>
           </div>
         </div>
