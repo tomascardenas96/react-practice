@@ -19,31 +19,6 @@ import { ActiveUserInterface } from 'src/common/interfaces/active-user.interface
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
-  @Post('upload-profile-picture')
-  @UseInterceptors(
-    FileInterceptor('file', {
-      storage: diskStorage({
-        destination: './uploads',
-        filename: (req, file, cb) => {
-          // Usa el nombre original del archivo con su extensión
-          const uniqueSuffix = `${Date.now()}-${Math.round(
-            Math.random() * 1e9,
-          )}`;
-          return cb(
-            null,
-            `${file.originalname}-${uniqueSuffix}${extname(file.originalname)}`,
-          );
-        },
-      }),
-    }),
-  )
-  uploadFile(
-    @UploadedFile() file: Express.Multer.File,
-    @ActiveUser() activeUser: ActiveUserInterface,
-  ) {
-    return this.userService.uploadFile(file, activeUser);
-  }
-
   @Get()
   findActiveUser(@ActiveUser() activeUser: ActiveUserInterface) {
     return this.userService.findActiveUser(activeUser)

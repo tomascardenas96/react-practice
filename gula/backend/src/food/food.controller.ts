@@ -38,10 +38,10 @@ export class FoodController {
     return this.foodService.findByCategory(category)
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateFoodDto: UpdateFoodDto) {
-    return this.foodService.update(+id, updateFoodDto);
-  }
+  // @Patch(':id')
+  // update(@Param('id') id: string, @Body() updateFoodDto: UpdateFoodDto) {
+  //   return this.foodService.update(+id, updateFoodDto);
+  // }
 
   @Delete(':id')
   remove(@Param('id') id: string) {

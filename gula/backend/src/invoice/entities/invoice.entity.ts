@@ -20,6 +20,9 @@ export class Invoice {
   invoiceNumber: string;
 
   @Column()
+  foodId: number;
+
+  @Column()
   foodDescription: string;
 
   @Column()

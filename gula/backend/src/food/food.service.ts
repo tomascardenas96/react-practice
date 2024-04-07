@@ -80,8 +80,11 @@ export class FoodService {
     return this.foodRepository.find({ where: { category: foundCategory } });
   }
 
-  update(id: number, updateFoodDto: UpdateFoodDto) {
-    return `This action updates a #${id} food`;
+  //Para actualizar el stock cuando se emita la factura.
+  async updateStock(foodId: number, amount: number) {
+    const food = await this.foodRepository.findOneBy({ foodId });
+    food.stock = food.stock - amount;
+    this.foodRepository.save(food);
   }
 
   remove(id: number) {

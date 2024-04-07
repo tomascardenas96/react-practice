@@ -8,12 +8,14 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from './entities/user.entity';
 import { ActiveUserInterface } from 'src/common/interfaces/active-user.interface';
+import { ProfileService } from 'src/profile/profile.service';
 
 @Injectable()
 export class UserService {
   constructor(
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
+    private readonly profileService: ProfileService,
   ) {}
 
   //Este metodo posiblemente no se utilice
@@ -24,7 +26,6 @@ export class UserService {
   create(user: CreateUserDto) {
     const newUser = this.userRepository.create({
       ...user,
-      profilename: user.email,
     });
     return this.userRepository.save(newUser);
   }
@@ -38,15 +39,7 @@ export class UserService {
   findByEmailWithPassword(email: string) {
     return this.userRepository.findOne({
       where: { email },
-      select: [
-        'userId',
-        'email',
-        'username',
-        'password',
-        'role',
-        'permission',
-        'profilename',
-      ],
+      select: ['userId', 'email', 'username', 'password', 'role', 'permission'],
     });
   }
 
@@ -54,35 +47,21 @@ export class UserService {
     return this.userRepository.findOneBy({ username });
   }
 
-  async findByProfileName(profilename: string) {
-    const foundUser = await this.userRepository.findOneBy({ profilename });
+  async findByProfileName(profileName: string) {
+    const profile =
+      await this.profileService.getProfileByProfileName(profileName);
+    const foundUser = await this.userRepository.findOneBy({
+      userId: profile.user.userId,
+    });
     if (!foundUser) {
       throw new NotFoundException('User not found by profile name');
     }
     return foundUser;
   }
 
-  async uploadFile(file: Express.Multer.File, activeUser: ActiveUserInterface) {
-    if (!file) {
-      throw new BadRequestException('No file uploaded');
-    }
-    const user = await this.userRepository.findOne({
-      where: { profilename: activeUser.profilename },
-    });
-    if (!user) {
-      throw new NotFoundException('User not found');
-    }
-
-    user.profilePhoto = file.filename;
-
-    await this.userRepository.save(user);
-
-    return file;
-  }
-
   async findActiveUser(activeUser: ActiveUserInterface) {
     const user = await this.userRepository.findOne({
-      where: { profilename: activeUser.profilename },
+      where: { userId: activeUser.userId },
     });
 
     return user;

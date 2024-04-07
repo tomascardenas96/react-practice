@@ -9,12 +9,14 @@ import { UserService } from 'src/user/user.service';
 import { JwtService } from '@nestjs/jwt';
 import { LoginDto } from './dto/login.dto';
 import * as bcryptjs from 'bcryptjs';
+import { ProfileService } from 'src/profile/profile.service';
 
 @Injectable()
 export class AuthService {
   constructor(
     private readonly userService: UserService,
     private readonly jwtService: JwtService,
+    private readonly profileService: ProfileService,
   ) {}
 
   async register(user: RegisterDto) {
@@ -50,10 +52,12 @@ export class AuthService {
       throw new UnauthorizedException('Incorrect password');
     }
 
+    //Crea un perfil para el usuario en caso que no posea uno.
+    await this.profileService.create(email, user);
+
     //Estos son los datos que van a ir encriptados dentro del token.
     const payload = {
       userId: user.userId,
-      profilename: user.profilename,
       username: user.username,
       permission: user.permission,
     };
@@ -66,6 +70,7 @@ export class AuthService {
     const token = await this.jwtService.signAsync(payload, {
       secret: secretKey,
     });
+    //No darle bola
     const refreshToken = await this.jwtService.signAsync(payload, {
       secret: secretKey,
       expiresIn: '7d',

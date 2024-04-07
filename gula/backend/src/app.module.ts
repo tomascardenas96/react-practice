@@ -12,6 +12,7 @@ import { FoodOnCartModule } from './food_on_cart/food_on_cart.module';
 import { InvoiceModule } from './invoice/invoice.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
+import { ProfileModule } from './profile/profile.module';
 
 @Module({
   imports: [
@@ -40,6 +41,7 @@ import { join } from 'path';
       rootPath: join(__dirname, '..', 'uploads'),
       serveRoot: '/uploads',
     }),
+    ProfileModule,
   ],
   controllers: [],
   providers: [],

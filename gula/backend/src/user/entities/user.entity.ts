@@ -11,11 +11,12 @@ import { UserRole } from '../../common/enum/role.enum';
 import { Post } from '../../post/entities/post.entity';
 import { Shop } from 'src/shops/entities/shop.entity';
 import { Cart } from 'src/cart/entities/cart.entity';
+import { Profile } from 'src/profile/entities/profile.entity';
 
 @Entity()
 export class User {
   @PrimaryGeneratedColumn()
-  userId: string;
+  userId: number;
 
   @Column({ nullable: false })
   username: string;
@@ -26,12 +27,6 @@ export class User {
   //Select false es para que no se muestre la contraseña en el retorno.
   @Column({ nullable: false, select: false })
   password: string;
-
-  @Column({ nullable: false })
-  profilename: string;
-
-  @Column({ default: 'c0749b7cc401421662ae901ec8f9f660.jpg' })
-  profilePhoto: string;
 
   @Column({
     type: 'enum',
@@ -54,4 +49,7 @@ export class User {
 
   @OneToOne(() => Cart, (cart) => cart.user, { onDelete: 'CASCADE' })
   cart: Cart;
+
+  @OneToOne(() => Profile, (profile) => profile.user, { onDelete: 'CASCADE' })
+  profile: Profile;
 }
